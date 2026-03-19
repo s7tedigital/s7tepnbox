@@ -5,25 +5,22 @@ from api.schemas.plan import Estrategia, PlanoOperacional
 
 def operational_node(state: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Operational Planner V2.1 (PNBOX).
-    Gera: Estrategia + PlanoOperacional como Structured Output.
+    Operational Planner V3.0 (PNBOX High Density).
+    Gera: Estrategia + PlanoOperacional.
     """
     messages = state.get("messages", [])
     
     operational_prompt = SystemMessage(
         content=(
-            "1. VISÃO: Defina a visão de longo prazo (3-5 anos) da empresa.\n"
-            "2. MISSÃO: Crie uma missão clara e inspiradora.\n"
-            "3. VALORES: Liste no mínimo 4 valores fundamentais.\n"
-            "4. PILARES CULTURAIS: OBRIGATÓRIO: Explique em 1-2 parágrafos como a cultura e os valores suportam a estratégia.\n"
-            "5. MATRIZ SWOT EXPANDIDA: Mínimo 3 itens por quadrante com ações estratégicas concretas.\n"
-            "6. OBJETIVOS SMART: Até 5 objetivos específicos para os primeiros 12 meses.\n"
-            "7. PLANO OPERACIONAL: Atividades-chave (min 4), Parceiros (min 3), Infraestrutura, Aspectos Legais e Equipe (com cargos).\n\n"
-"SWOT EXPANDIDA: Mínimo 3 itens por quadrante com ações estratégicas concretas.\n"
-            "6. OBJETIVOS SMART: Até 5 objetivos específicos para os primeiros 12 meses.\n"
-            "7. PLANO OPERACIONAL: Atividades-chave (min 4), Parceiros (min 3), Infraestrutura, Aspectos Legais e Equipe (com cargos).\n\n"
-            "NÃO DEIXE NENHUM CAMPO VAZIO. Faça projeções audazes e coerentes para o Brasil.\n"
-            "PREENCHA EXATAMENTE A ESTRUTURA JSON EXIGIDA."
+            "Você é o Diretor de Operações e Estratégia da S7te Digital. "
+            "Sua missão é estruturar a visão e o motor operacional com profundidade SEBRAE PNBOX.\n\n"
+            "INSTRUÇÕES OBRIGATÓRIAS:\n"
+            "1. CULTURA: Defina Missão, Visão e Valores (min 4). Explique os Pilares Culturais.\n"
+            "2. SWOT EXPANDIDA: Forças, Fraquezas, Oportunidades e Ameaças. "
+            "Para CADA item, defina impact_level (High/Low) e strategic_action.\n"
+            "3. OBJETIVOS SMART: Liste 5 metas claras para o primeiro ano.\n"
+            "4. OPERAÇÕES: Atividades-chave, Parceiros, Infraestrutura, Aspectos Legais e Equipe Inicial.\n\n"
+            "NUNCA deixe campos vazios. Use parágrafos densos e profissionais."
         )
     )
     
@@ -32,7 +29,6 @@ def operational_node(state: Dict[str, Any]) -> Dict[str, Any]:
     
     try:
         local_conversation = [operational_prompt] + messages
-        
         strategy_data = llm_strategy.invoke(local_conversation)
         ops_data = llm_ops.invoke(local_conversation)
         

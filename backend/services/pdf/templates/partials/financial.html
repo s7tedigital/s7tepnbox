@@ -1,117 +1,118 @@
-<h1 class="chapter-title" id="financial">5. Planejamento Financeiro (Padrão PNBOX)</h1>
+<h1 class="chapter-title" id="financial">5. Planejamento Financeiro Estratégico</h1>
 
-<h2>Investimentos Iniciais</h2>
-<h3>Investimento Fixo (Equipamentos, Móveis, Softwares)</h3>
-<table class="financial-table">
-    <thead>
-        <tr>
-            <th>Descrição do Item</th>
-            <th>Valor Estimado (R$)</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in plan.financas.investimento_fixo.itens %}
-        <tr>
-            <td>{{ item.descricao }}</td>
-            <td>R$ {{ item.valor }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-    <tfoot>
-        <tr>
-            <td><strong>TOTAL INVESTIMENTO FIXO</strong></td>
-            <td><strong>R$ {{ plan.financas.investimento_fixo.total }}</strong></td>
-        </tr>
-    </tfoot>
-</table>
+<h2>Estrutura de Investimentos (PNBOX V3.0)</h2>
+<p>Detalhamento de todo o capital necessário para a implantação e operação inicial do negócio.</p>
 
-<h3>Capital de Giro e Reserva</h3>
-<div class="highlight-box">
-    <p><strong>Estoque Inicial:</strong> R$ {{ plan.financas.capital_giro.estoque_inicial | default('0') }}</p>
-    <p><strong>Caixa Mínimo (Reserva):</strong> R$ {{ plan.financas.capital_giro.caixa_minimo | default('0') }}</p>
-    <hr>
-    <p><strong>INVESTIMENTO TOTAL (Fixo + Giro):</strong> R$ {{ plan.financas.investimento_total }}</p>
+<div style="display: flex; gap: 20px;">
+    <div style="flex: 1;">
+        <h3>Investimentos Fixos</h3>
+        <table class="financial-table" style="font-size: 8pt;">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Valor (R$)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inv in plan.financas.fixed_investments %}
+                <tr>
+                    <td>{{ inv.item }}</td>
+                    <td>R$ {{ "%.2f"|format(inv.value) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div style="flex: 1;">
+        <h3>Investimentos Pré-Operacionais</h3>
+        <table class="financial-table" style="font-size: 8pt;">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Valor (R$)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for inv in plan.financas.pre_operational_investments %}
+                <tr>
+                    <td>{{ inv.item }}</td>
+                    <td>R$ {{ "%.2f"|format(inv.value) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<h2>Detalhamento de Custos Mensais (Opex)</h2>
-<table class="financial-table">
-    <thead>
-        <tr>
-            <th>Descrição</th>
-            <th>Tipo</th>
-            <th>Valor Mensal (Estimado)</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in plan.financas.custos_fixos.itens %}
-        <tr>
-            <td>{{ item.descricao }}</td>
-            <td>Fixo</td>
-            <td>R$ {{ item.valor_mensal }}</td>
-        </tr>
-        {% endfor %}
-        {% for item in plan.financas.custos_variaveis.itens %}
-        <tr>
-            <td>{{ item.descricao }}</td>
-            <td>Variável</td>
-            <td>R$ {{ item.valor_mensal }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="highlight-box" style="display: flex; justify-content: space-between; align-items: center;">
+    <div>
+        <strong>Capital de Giro Necessário:</strong><br>
+        <span style="font-size: 14pt;">R$ {{ "%.2f"|format(plan.financas.working_capital) }}</span>
+    </div>
+    <div style="text-align: right; border-left: 2px solid #cbd5e1; padding-left: 20px;">
+        <strong>INVESTIMENTO TOTAL:</strong><br>
+        <span style="font-size: 18pt; color: #4f46e5; font-weight: bold;">R$ {{ "%.2f"|format(plan.financas.fixed_investments|sum(attribute='value') + plan.financas.pre_operational_investments|sum(attribute='value') + plan.financas.working_capital) }}</span>
+    </div>
+</div>
 
-<h2 style="page-break-before: always;">DRE Projetada (12 Meses)</h2>
+<h2 style="page-break-before: always;">DRE Projetada - Primeiro Ano (12 Meses)</h2>
+<p>Projeção detalhada de receitas, custos e lucro líquido mês a mês.</p>
+
 <table class="financial-table" style="font-size: 8pt;">
     <thead>
         <tr>
             <th>Mês</th>
-            <th>Rec. Bruta</th>
+            <th>Receita Bruta</th>
             <th>Impostos</th>
-            <th>Rec. Líquida</th>
             <th>C. Variáveis</th>
             <th>Margem Cont.</th>
-            <th>C. Fixos</th>
-            <th>Resultado</th>
+            <th>Custos Fixos</th>
+            <th>Lucro Líquido</th>
         </tr>
     </thead>
     <tbody>
-        {% for month in plan.financas.dre_anual.projecao_mensal %}
-        <tr>
-            <td>{{ month.mes }}</td>
-            <td>R$ {{ month.receita_bruta }}</td>
-            <td>R$ {{ month.deducoes }}</td>
-            <td>R$ {{ month.receita_liquida }}</td>
-            <td>R$ {{ month.custos_variaveis }}</td>
-            <td>R$ {{ month.margem_contribuicao }}</td>
-            <td>R$ {{ month.custos_fixos }}</td>
-            <td style="color: {% if month.lucro_operacional and month.lucro_operacional | string | float >= 0 %}green{% else %}red{% endif %}; font-weight: bold;">
-                R$ {{ month.lucro_operacional }}
+        {% for mes in plan.financas.dre_12_months %}
+        <tr {% if mes.net_profit < 0 %}style="background: #fff1f2;"{% endif %}>
+            <td><strong>{{ mes.month_name }}</strong></td>
+            <td>R$ {{ "%.2f"|format(mes.revenue) }}</td>
+            <td>R$ {{ "%.2f"|format(mes.taxes) }}</td>
+            <td>R$ {{ "%.2f"|format(mes.variable_costs) }}</td>
+            <td>R$ {{ "%.2f"|format(mes.contribution_margin) }}</td>
+            <td>R$ {{ "%.2f"|format(mes.fixed_costs) }}</td>
+            <td style="font-weight: bold; color: {% if mes.net_profit >= 0 %}#15803d{% else %}#b91c1c{% endif %};">
+                R$ {{ "%.2f"|format(mes.net_profit) }}
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 
-<h2>Indicadores de Viabilidade</h2>
-<div class="financial-grid" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
-    <div class="highlight-box" style="flex: 1; min-width: 150px;">
-        <small>Lucratividade</small><br>
-        <strong>{{ plan.financas.indicadores.lucratividade_percentual }}%</strong>
+<h2>Análise de Cenários Financeiros</h2>
+<div style="display: flex; gap: 15px;">
+    {% for scenario in plan.financas.scenarios %}
+    <div class="funnel-card" style="flex: 1; border-top: 4px solid {% if scenario.scenario_name == 'Optimistic' %}#10b981{% elif scenario.scenario_name == 'Pessimistic' %}#ef4444{% else %}#6366f1{% endif %};">
+        <div class="funnel-header">{{ scenario.scenario_name }}</div>
+        <p style="font-size: 8pt; color: #64748b;">{{ scenario.justification }}</p>
+        <hr>
+        <div style="font-size: 9pt;">
+            Receita: <strong>R$ {{ "%.2f"|format(scenario.estimated_revenue) }}</strong><br>
+            Lucro: <strong style="color: {% if scenario.estimated_profit >= 0 %}#15803d{% else %}#b91c1c{% endif %};">R$ {{ "%.2f"|format(scenario.estimated_profit) }}</strong>
+        </div>
     </div>
-    <div class="highlight-box" style="flex: 1; min-width: 150px;">
-        <small>Rentabilidade</small><br>
-        <strong>{{ plan.financas.indicadores.rentabilidade_percentual }}%</strong>
+    {% endfor %}
+</div>
+
+<h2>Indicadores de Viabilidade e Comentários</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    {% for label, value in plan.financas.viability_indicators.items() %}
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 10px; border-radius: 6px; flex: 1; min-width: 120px; text-align: center;">
+        <small style="text-transform: uppercase; font-size: 7pt;">{{ label }}</small><br>
+        <strong style="font-size: 11pt;">{{ value }}{% if 'ROI' in label or 'Lucratividade' in label %}%{% elif 'Payback' in label %} meses{% else %}{% endif %}</strong>
     </div>
-    <div class="highlight-box" style="flex: 1; min-width: 150px;">
-        <small>Payback (Retorno)</small><br>
-        <strong>{{ plan.financas.indicadores.payback_meses }} meses</strong>
-    </div>
-    <div class="highlight-box" style="flex: 1; min-width: 150px;">
-        <small>Ponto de Equilíbrio (R$)</small><br>
-        <strong>R$ {{ plan.financas.indicadores.ponto_equilibrio_faturamento }}</strong>
-    </div>
-    <div class="highlight-box" style="flex: 1; min-width: 150px;">
-        <small>Ponto de Equilíbrio (Unid.)</small><br>
-        <strong>{{ plan.financas.indicadores.ponto_equilibrio_unidades }}</strong>
-    </div>
+    {% endfor %}
+</div>
+
+<div class="highlight-box">
+    <strong>Análise do Especialista Financeiro:</strong><br>
+    <p style="font-size: 10pt; line-height: 1.5;">{{ plan.financas.comentarios_financeiros }}</p>
 </div>

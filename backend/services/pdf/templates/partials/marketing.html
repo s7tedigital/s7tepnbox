@@ -1,72 +1,119 @@
-<h1 class="chapter-title" id="marketing">3. Ferramentas de Marketing e Growth</h1>
+<h1 class="chapter-title" id="marketing">3. Plano de Marketing e Growth</h1>
 
-<h2>Estratégia do Funil de Vendas (AIDA/GARR)</h2>
-<table class="financial-table">
-    <thead>
-        <tr>
-            <th>Etapa</th>
-            <th>Descrição</th>
-            <th>Ações Chave</th>
-            <th>Conversão (Est.)</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Topo (Atratividade)</strong></td>
-            <td>{{ plan.ferramentas.funil_vendas.topo.descricao }}</td>
-            <td>{{ plan.ferramentas.funil_vendas.topo.acoes | join(', ') }}</td>
-            <td>{{ plan.ferramentas.funil_vendas.topo.taxa_conversao_estimada }}%</td>
-        </tr>
-        <tr>
-            <td><strong>Meio (Engajamento)</strong></td>
-            <td>{{ plan.ferramentas.funil_vendas.meio.descricao }}</td>
-            <td>{{ plan.ferramentas.funil_vendas.meio.acoes | join(', ') }}</td>
-            <td>{{ plan.ferramentas.funil_vendas.meio.taxa_conversao_estimada }}%</td>
-        </tr>
-        <tr>
-            <td><strong>Fundo (Conversão)</strong></td>
-            <td>{{ plan.ferramentas.funil_vendas.fundo.descricao }}</td>
-            <td>{{ plan.ferramentas.funil_vendas.fundo.acoes | join(', ') }}</td>
-            <td>{{ plan.ferramentas.funil_vendas.fundo.taxa_conversao_estimada }}%</td>
-        </tr>
-    </tbody>
-</table>
+<h2>Estratégia de Funil AIDA (Densidade PNBOX)</h2>
+<p>Nossa estratégia de conversão é baseada em um funil de alta performance, com investimentos e KPIs específicos por etapa.</p>
 
-<div class="highlight-box">
-    <strong>Métricas de Unidade de Negócio:</strong><br/>
-    CAC Projetado (Adquirir Cliente): R$ {{ plan.ferramentas.funil_vendas.cac_projetado }}<br/>
-    LTV Projetado (Valor de Vida): R$ {{ plan.ferramentas.funil_vendas.ltv_projetado }}<br/>
-    Ratio LTV/CAC: {{ plan.ferramentas.funil_vendas.razao_ltv_cac }}
+<div style="display: flex; flex-direction: column; gap: 15px;">
+    <!-- Topo -->
+    <div class="funnel-card">
+        <div class="funnel-header">TOPO DO FUNIL (Attention) - {{ plan.marketing.sales_funnel.top.stage_name }}</div>
+        <p style="font-size: 10pt;">{{ plan.marketing.sales_funnel.top.description }}</p>
+        <table class="financial-table" style="margin-top: 10px; font-size: 9pt;">
+            <tr>
+                <th>Orçamento (R$)</th>
+                <th>Alcance (Pessoas)</th>
+                <th>Engajamento (CTA)</th>
+                <th>Conv. Etapa (%)</th>
+                <th>CAC Etapa (R$)</th>
+            </tr>
+            <tr>
+                <td>R$ {{ "%.2f"|format(plan.marketing.sales_funnel.top.invested_budget) }}</td>
+                <td>{{ plan.marketing.sales_funnel.top.reached_people }}</td>
+                <td>{{ plan.marketing.sales_funnel.top.call_to_action_people }}</td>
+                <td>{{ plan.marketing.sales_funnel.top.conversion_rate }}%</td>
+                <td>R$ {{ "%.2f"|format(plan.marketing.sales_funnel.top.cac) }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Meio -->
+    <div class="funnel-card" style="border-left: 6px solid #6366f1;">
+        <div class="funnel-header">MEIO DO FUNIL (Interest/Desire) - {{ plan.marketing.sales_funnel.middle.stage_name }}</div>
+        <p style="font-size: 10pt;">{{ plan.marketing.sales_funnel.middle.description }}</p>
+        <table class="financial-table" style="margin-top: 10px; font-size: 9pt;">
+            <tr>
+                <th>Orçamento (R$)</th>
+                <th>Alcance (Pessoas)</th>
+                <th>Engajamento (CTA)</th>
+                <th>Conv. Etapa (%)</th>
+                <th>CAC Etapa (R$)</th>
+            </tr>
+            <tr>
+                <td>R$ {{ "%.2f"|format(plan.marketing.sales_funnel.middle.invested_budget) }}</td>
+                <td>{{ plan.marketing.sales_funnel.middle.reached_people }}</td>
+                <td>{{ plan.marketing.sales_funnel.middle.call_to_action_people }}</td>
+                <td>{{ plan.marketing.sales_funnel.middle.conversion_rate }}%</td>
+                <td>R$ {{ "%.2f"|format(plan.marketing.sales_funnel.middle.cac) }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Fundo -->
+    <div class="funnel-card" style="border-left: 6px solid #4338ca; background: #f8fafc;">
+        <div class="funnel-header">FUNDO DO FUNIL (Action) - {{ plan.marketing.sales_funnel.bottom.stage_name }}</div>
+        <p style="font-size: 10pt;">{{ plan.marketing.sales_funnel.bottom.description }}</p>
+        <table class="financial-table" style="margin-top: 10px; font-size: 9pt;">
+            <tr>
+                <th>Orçamento (R$)</th>
+                <th>Alcance (Pessoas)</th>
+                <th>Vendas (CTA)</th>
+                <th>Conv. Etapa (%)</th>
+                <th>CAC Etapa (R$)</th>
+            </tr>
+            <tr>
+                <td>R$ {{ "%.2f"|format(plan.marketing.sales_funnel.bottom.invested_budget) }}</td>
+                <td>{{ plan.marketing.sales_funnel.bottom.reached_people }}</td>
+                <td>{{ plan.marketing.sales_funnel.bottom.call_to_action_people }}</td>
+                <td>{{ plan.marketing.sales_funnel.bottom.conversion_rate }}%</td>
+                <td>R$ {{ "%.2f"|format(plan.marketing.sales_funnel.bottom.cac) }}</td>
+            </tr>
+        </table>
+    </div>
 </div>
 
-<h2>Canais de Aquisição Prioritários</h2>
-<ul>
-{% for channel in plan.ferramentas.canais_aquisicao %}
-    <li>
-        <strong>{{ channel.nome }}:</strong> {{ channel.estrategia }}<br>
-        <small>Atratividade: {{ channel.nota_atratividade }}/10 | Alcance: {{ channel.nota_alcance }}/10</small>
-    </li>
-{% endfor %}
-</ul>
+<div class="highlight-box" style="display: flex; justify-content: space-around; text-align: center;">
+    <div>
+        <small>CAC Global</small><br>
+        <strong>R$ {{ "%.2f"|format(plan.marketing.sales_funnel.global_cac) }}</strong>
+    </div>
+    <div style="border-left: 1px solid #cbd5e1; padding-left: 20px;">
+        <small>LTV (Lifetime Value)</small><br>
+        <strong>R$ {{ "%.2f"|format(plan.marketing.sales_funnel.ltv) }}</strong>
+    </div>
+    <div style="border-left: 1px solid #cbd5e1; padding-left: 20px;">
+        <small>Ratio LTV/CAC</small><br>
+        <strong style="color: {% if plan.marketing.sales_funnel.ltv_cac_ratio >= 3 %}#15803d{% else %}#b91c1c{% endif %};">
+            {{ "%.1f"|format(plan.marketing.sales_funnel.ltv_cac_ratio) }}x
+        </strong>
+    </div>
+</div>
 
-<h2 style="page-break-before: always;">Quadro de Experimentação</h2>
+<h2 style="page-break-before: always;">Quadro de Experimentação (Validando o Modelo)</h2>
+<p>Seguindo a metodologia Lean, listamos as principais hipóteses que serão validadas para reduzir os riscos do negócio.</p>
+
 <table class="financial-table" style="font-size: 9pt;">
     <thead>
         <tr>
-            <th>Hipótese</th>
+            <th>Hipótese de Negócio</th>
             <th>Método de Validação</th>
             <th>Métrica de Sucesso</th>
             <th>Prazo</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
-    {% for hip in plan.ferramentas.quadro_experimentacao.hipoteses %}
+        {% for hip in plan.marketing.experiment_board %}
         <tr>
-            <td>{{ hip.hipotese }}</td>
-            <td>{{ hip.metodo_validacao }}</td>
-            <td>{{ hip.metrica_sucesso }}</td>
-            <td>{{ hip.prazo_dias }} dias</td>
+            <td><strong>{{ hip.hypothesis_description }}</strong></td>
+            <td>{{ hip.validation_method }}</td>
+            <td>{{ hip.success_metric }}</td>
+            <td>{{ hip.deadline }} dias</td>
+            <td>
+                <span class="badge {% if hip.status == 'Validado' %}badge-low{% else %}badge-high{% endif %}">
+                    {{ hip.status }}
+                </span>
+            </td>
         </tr>
-    {% endfor %}
+        {% endfor %}
     </tbody>
 </table>

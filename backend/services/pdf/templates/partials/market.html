@@ -10,7 +10,7 @@
             <th>Tendência</th>
             <th>Concorrência</th>
             <th>Aderência</th>
-            <th>Média</th>
+            <th>Nota Final</th>
         </tr>
     </thead>
     <tbody>
@@ -27,72 +27,116 @@
 </table>
 <p><em>Justificativa: {{ plan.cliente_mercado.segmentacao.justificativa }}</em></p>
 
-<h2>Público-Alvo e Persona</h2>
+<h2>Perfil da Persona (PNBOX High Density)</h2>
 <div class="highlight-box">
-    <p><strong>Nome:</strong> {{ plan.cliente_mercado.persona.nome_ficticio | default('') }}</p>
-    <p><strong>Perfil:</strong> {{ plan.cliente_mercado.persona.idade }} anos, {{ plan.cliente_mercado.persona.genero }}, {{ plan.cliente_mercado.persona.profissao }}</p>
-    <p><strong>Renda/Local:</strong> {{ plan.cliente_mercado.persona.renda_mensal }} | {{ plan.cliente_mercado.persona.localizacao }}</p>
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+        <div style="width: 65%;">
+            <p><strong>Nome Fictício:</strong> {{ plan.cliente_mercado.persona.nome_ficticio }}</p>
+            <p style="font-style: italic; color: #6366f1; font-size: 11pt; margin: 10px 0;">"{{ plan.cliente_mercado.persona.frase_marcante }}"</p>
+            <div style="font-size: 10pt; line-height: 1.5; color: #334155;">
+                <strong>Biografia Narrativa:</strong><br>
+                {{ plan.cliente_mercado.persona.persona_bio | replace('\n', '<br>') }}
+            </div>
+        </div>
+        <div style="width: 30%; background: #f8fafc; padding: 10px; border-radius: 8px; font-size: 9pt;">
+            <strong>Demografia:</strong><br>
+            • Idade: {{ plan.cliente_mercado.persona.demographics.idade }}<br>
+            • Gênero: {{ plan.cliente_mercado.persona.demographics.genero }}<br>
+            • Renda: {{ plan.cliente_mercado.persona.demographics.renda }}<br>
+            • Local: {{ plan.cliente_mercado.persona.demographics.localizacao }}<br>
+            • Estudo: {{ plan.cliente_mercado.persona.demographics.escolaridade }}<br>
+            <br>
+            <strong>Fluência Digital:</strong><br>
+            {{ plan.cliente_mercado.persona.digital_fluency }}
+        </div>
+    </div>
     <hr>
-    <p><strong>Fluência Digital:</strong> {{ plan.cliente_mercado.persona.fluencia_digital }}</p>
-    <p><strong>Canais:</strong> {{ plan.cliente_mercado.persona.canais_preferidos | default([]) | join(', ') }}</p>
-    <p style="font-style: italic; color: #6366f1;">"{{ plan.cliente_mercado.persona.frase_marcante }}"</p>
-    <div style="margin-top: 15px; font-size: 10pt; line-height: 1.4; color: #475569;">
-        <strong>Biografia:</strong><br>
-        {{ plan.cliente_mercado.persona.biografia | default('A biografia detalhada está sendo processada...') | replace('\n', '<br>') }}
+    <div style="display: flex; gap: 20px;">
+        <div style="flex: 1;">
+            <strong>Dores:</strong>
+            <ul style="margin: 5px 0; font-size: 9pt;">
+                {% for dor in plan.cliente_mercado.persona.dores_principais %}
+                <li>{{ dor }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div style="flex: 1;">
+            <strong>Desejos:</strong>
+            <ul style="margin: 5px 0; font-size: 9pt;">
+                {% for desejo in plan.cliente_mercado.persona.desejos %}
+                <li>{{ desejo }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
 
-<h3>Rotina da Persona</h3>
+<h3>Rotina Diária</h3>
 <table class="financial-table">
     <tr>
-        <td style="width: 33%;"><strong>Manhã</strong><br>{{ plan.cliente_mercado.persona.rotina_manha }}</td>
-        <td style="width: 33%;"><strong>Tarde</strong><br>{{ plan.cliente_mercado.persona.rotina_tarde }}</td>
-        <td style="width: 33%;"><strong>Noite</strong><br>{{ plan.cliente_mercado.persona.rotina_noite }}</td>
+        <td style="width: 33%;"><strong>Manhã</strong><br><small>{{ plan.cliente_mercado.persona.routine.morning }}</small></td>
+        <td style="width: 33%;"><strong>Tarde</strong><br><small>{{ plan.cliente_mercado.persona.routine.afternoon }}</small></td>
+        <td style="width: 33%;"><strong>Noite</strong><br><small>{{ plan.cliente_mercado.persona.routine.night }}</small></td>
     </tr>
 </table>
 
-<h2>Mapeamento da Jornada do Cliente</h2>
+<h2>Estratégia Defensiva & Matriz de Concorrência</h2>
 <table class="financial-table" style="font-size: 9pt;">
     <thead>
         <tr>
-            <th>Etapa</th>
-            <th>O que faz/sente</th>
+            <th>Concorrente</th>
+            <th>Convênia.</th>
+            <th>Inovação</th>
+            <th>Preço</th>
+            <th>Qualidade</th>
+            <th>Suporte</th>
+            <th>Tecnol.</th>
+            <th>Média</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for comp in plan.problema_solucao.analise_concorrencia.competitor_matrix %}
+        <tr {% if loop.first %}style="background: #eef2ff; font-weight: bold;"{% endif %}>
+            <td>{{ comp.name }}</td>
+            <td>{{ comp.convenience }}</td>
+            <td>{{ comp.innovation }}</td>
+            <td>{{ comp.price }}</td>
+            <td>{{ comp.quality }}</td>
+            <td>{{ comp.support }}</td>
+            <td>{{ comp.technology }}</td>
+            <td>{{ comp.average_score }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="highlight-box" style="border-left-color: #ef4444; margin-top: 10px;">
+    <strong>Plano de Defesa Estratégica:</strong><br>
+    <p>{{ plan.problema_solucao.analise_concorrencia.estrategia_defensiva }}</p>
+</div>
+
+<h2 style="page-break-before: always;">Mapeamento da Jornada do Cliente</h2>
+<table class="financial-table" style="font-size: 9pt;">
+    <thead>
+        <tr>
+            <th>Fase</th>
+            <th>Ações do Cliente</th>
             <th>Pontos de Contato</th>
-            <th>Emoções</th>
+            <th>Estado Emocional</th>
             <th>Oportunidades</th>
         </tr>
     </thead>
     <tbody>
+        {% for step in plan.cliente_mercado.customer_journey %}
         <tr>
-            <td><strong>Antes</strong></td>
-            <td>{{ plan.cliente_mercado.jornada.antes.descricao }}</td>
-            <td>{{ plan.cliente_mercado.jornada.antes.pontos_de_contato | join(', ') }}</td>
-            <td>{{ plan.cliente_mercado.jornada.antes.emocoes }}</td>
-            <td>{{ plan.cliente_mercado.jornada.antes.oportunidades | join(', ') }}</td>
+            <td><strong>{{ step.phase_name }}</strong></td>
+            <td>{{ step.customer_action }}</td>
+            <td>{{ step.touchpoints | join(', ') }}</td>
+            <td>{{ step.emotional_state }}</td>
+            <td>{{ step.opportunities | join('<br>• ') }}</td>
         </tr>
-        <tr>
-            <td><strong>Durante</strong></td>
-            <td>{{ plan.cliente_mercado.jornada.durante.descricao }}</td>
-            <td>{{ plan.cliente_mercado.jornada.durante.pontos_de_contato | join(', ') }}</td>
-            <td>{{ plan.cliente_mercado.jornada.durante.emocoes }}</td>
-            <td>{{ plan.cliente_mercado.jornada.durante.oportunidades | join(', ') }}</td>
-        </tr>
-        <tr>
-            <td><strong>Depois</strong></td>
-            <td>{{ plan.cliente_mercado.jornada.depois.descricao }}</td>
-            <td>{{ plan.cliente_mercado.jornada.depois.pontos_de_contato | join(', ') }}</td>
-            <td>{{ plan.cliente_mercado.jornada.depois.emocoes }}</td>
-            <td>{{ plan.cliente_mercado.jornada.depois.oportunidades | join(', ') }}</td>
-        </tr>
+        {% endfor %}
     </tbody>
 </table>
-
-</table>
-
-<div class="highlight-box" style="border-left-color: #ef4444;">
-    <strong>Estratégia Defensiva e Diferenciação:</strong><br>
-    <p>{{ plan.problema_solucao.analise_concorrencia.estrategia_defensiva | default('Estratégia de diferenciação em análise...') }}</p>
-</div>
 
 <h2 style="page-break-before: always;">Matriz SWOT Expandida</h2>
 <table class="swot-grid">
@@ -101,7 +145,11 @@
             <div class="swot-title">Forças (Strengths)</div>
             <ul>
             {% for item in plan.estrategia.swot.forcas %}
-                <li><strong>{{ item.descricao }}</strong><br><small>Ação: {{ item.acao_estrategica }}</small></li>
+                <li>
+                    <strong>{{ item.descricao }}</strong> 
+                    <span class="badge {% if item.impact_level == 'High' %}badge-high{% else %}badge-low{% endif %}">{{ item.impact_level }}</span>
+                    <br><small>Ação: {{ item.strategic_action }}</small>
+                </li>
             {% endfor %}
             </ul>
         </td>
@@ -109,7 +157,11 @@
             <div class="swot-title">Fraquezas (Weaknesses)</div>
             <ul>
             {% for item in plan.estrategia.swot.fraquezas %}
-                <li><strong>{{ item.descricao }}</strong><br><small>Ação: {{ item.acao_estrategica }}</small></li>
+                <li>
+                    <strong>{{ item.descricao }}</strong>
+                    <span class="badge {% if item.impact_level == 'High' %}badge-high{% else %}badge-low{% endif %}">{{ item.impact_level }}</span>
+                    <br><small>Ação: {{ item.strategic_action }}</small>
+                </li>
             {% endfor %}
             </ul>
         </td>
@@ -119,7 +171,11 @@
             <div class="swot-title">Oportunidades</div>
             <ul>
             {% for item in plan.estrategia.swot.oportunidades %}
-                <li><strong>{{ item.descricao }}</strong><br><small>Ação: {{ item.acao_estrategica }}</small></li>
+                <li>
+                    <strong>{{ item.descricao }}</strong>
+                    <span class="badge {% if item.impact_level == 'High' %}badge-high{% else %}badge-low{% endif %}">{{ item.impact_level }}</span>
+                    <br><small>Ação: {{ item.strategic_action }}</small>
+                </li>
             {% endfor %}
             </ul>
         </td>
@@ -127,7 +183,11 @@
             <div class="swot-title">Ameaças (Threats)</div>
             <ul>
             {% for item in plan.estrategia.swot.ameacas %}
-                <li><strong>{{ item.descricao }}</strong><br><small>Ação: {{ item.acao_estrategica }}</small></li>
+                <li>
+                    <strong>{{ item.descricao }}</strong>
+                    <span class="badge {% if item.impact_level == 'High' %}badge-high{% else %}badge-low{% endif %}">{{ item.impact_level }}</span>
+                    <br><small>Ação: {{ item.strategic_action }}</small>
+                </li>
             {% endfor %}
             </ul>
         </td>

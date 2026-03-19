@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 # ============================================================
 # MÓDULO 1: CLIENTE & MERCADO
@@ -21,224 +21,183 @@ class Segmentacao(BaseModel):
     criterios_secundario: CriterioSegmentacao = Field(description="Notas do segmento secundário")
     justificativa: str = Field(description="Justificativa da escolha do segmento principal")
 
+class Demographics(BaseModel):
+    idade: str = Field(description="Faixa etária (ex: 35-50 anos)")
+    genero: str = Field(description="Gênero predominante")
+    renda: str = Field(description="Faixa de renda (ex: R$ 5k - 10k)")
+    localizacao: str = Field(description="Localização geográfica detalhada")
+    escolaridade: str = Field(description="Nível de instrução")
+
+class PersonaRoutine(BaseModel):
+    morning: str = Field(description="Rotina detalhada do período da manhã")
+    afternoon: str = Field(description="Rotina detalhada do período da tarde")
+    night: str = Field(description="Rotina detalhada do período da noite")
+
+class EmotionalSocialBenefits(BaseModel):
+    emocionais: List[str] = Field(description="Ganhos emocionais (ex: paz de espírito, confiança)")
+    sociais: List[str] = Field(description="Ganhos sociais (ex: status, reconhecimento)")
+    funcionais: List[str] = Field(description="Ganhos funcionais (ex: economia de tempo, facilidade)")
+
 class Persona(BaseModel):
-    nome_ficticio: str = Field(description="Nome fictício da persona (ex: 'João Motorista')")
-    idade: int = Field(description="Idade estimada da persona")
-    genero: str = Field(description="Gênero da persona")
-    renda_mensal: str = Field(description="Faixa de renda mensal")
-    profissao: str = Field(description="Profissão da persona")
-    localizacao: str = Field(description="Cidade/Estado de moradia")
-    dores_principais: List[str] = Field(description="Lista de dores/problemas que a persona enfrenta")
-    desejos: List[str] = Field(description="Lista de desejos e aspirações")
-    fluencia_digital: str = Field(description="Nível de fluência digital (Baixa/Média/Alta)")
-    canais_preferidos: List[str] = Field(description="Canais de comunicação preferidos (WhatsApp, Instagram, etc.)")
-    rotina_manha: str = Field(description="Descrição da rotina matinal típica")
-    rotina_tarde: str = Field(description="Descrição da rotina vespertina típica")
-    rotina_noite: str = Field(description="Descrição da rotina noturna típica")
-    biografia: str = Field(description="Breve biografia narrativa da persona (quem é, o que faz, por que tem esse problema)")
-    frase_marcante: str = Field(description="Uma frase que a persona diria sobre o problema")
+    nome_ficticio: str = Field(description="Nome fictício (ex: 'Ricardo Silva')")
+    persona_bio: str = Field(description="Biografia longa e detalhada da persona (mínimo 2 parágrafos)")
+    demographics: Demographics = Field(description="Dados demográficos estruturados")
+    digital_fluency: str = Field(description="Nível de fluência e principais canais (ex: 'Alta: WhatsApp, LinkedIn')")
+    routine: PersonaRoutine = Field(description="Rotina diária dividida em 3 períodos")
+    dores_principais: List[str] = Field(description="Pores e frustrações principais")
+    desejos: List[str] = Field(description="Desejos e aspirações")
+    benefits: EmotionalSocialBenefits = Field(description="Benefícios categorizados (Emocionais, Sociais, Funcionais)")
+    frase_marcante: str = Field(description="A frase que define a persona")
 
-class EtapaJornada(BaseModel):
-    descricao: str = Field(description="O que o cliente faz/sente nesta etapa")
-    pontos_de_contato: List[str] = Field(description="Onde ele interage com a marca")
-    emocoes: str = Field(description="Emoções predominantes nesta etapa")
-    oportunidades: List[str] = Field(description="Oportunidades de melhoria identificadas")
-
-class JornadaCliente(BaseModel):
-    antes: EtapaJornada = Field(description="Etapa ANTES de conhecer a solução")
-    durante: EtapaJornada = Field(description="Etapa DURANTE o uso da solução")
-    depois: EtapaJornada = Field(description="Etapa DEPOIS de usar a solução")
+class CustomerJourneyPhase(BaseModel):
+    phase_name: str = Field(description="Nome da fase: Before, During ou After")
+    customer_action: str = Field(description="O que o cliente faz nesta fase")
+    touchpoints: List[str] = Field(description="Pontos de contato com a marca/solução")
+    emotional_state: str = Field(description="Estado emocional do cliente")
+    opportunities: List[str] = Field(description="Oportunidades de conversão ou melhoria")
 
 class ClienteMercado(BaseModel):
-    tam_sam_som: str = Field(description="Análise detalhada do TAM (Total Addressable Market), SAM (Serviceable Available Market) e SOM (Serviceable Obtainable Market)")
-    segmentacao: Segmentacao = Field(description="Análise de segmentação com notas")
-    persona: Persona = Field(description="Perfil detalhado da persona principal")
-    jornada: JornadaCliente = Field(description="Mapeamento da jornada do cliente")
+    tam_sam_som: str = Field(description="Análise quantitativa do mercado brasileiro")
+    segmentacao: Segmentacao = Field(description="Matriz de segmentação")
+    persona: Persona = Field(description="Perfil ultra-denso da Persona")
+    customer_journey: List[CustomerJourneyPhase] = Field(description="Jornada do cliente em 3 fases (Antes, Durante, Depois)")
 
 # ============================================================
 # MÓDULO 2: PROBLEMA & SOLUÇÃO
 # ============================================================
 
-class BeneficiosProposta(BaseModel):
-    funcionais: List[str] = Field(description="Benefícios funcionais/práticos do produto")
-    emocionais: List[str] = Field(description="Benefícios emocionais (segurança, confiança, etc.)")
-    sociais: List[str] = Field(description="Benefícios sociais (status, pertencimento, etc.)")
-
 class PropostaValor(BaseModel):
-    declaracao: str = Field(description="Declaração da Proposta de Valor em 1-2 frases impactantes")
-    problema_central: str = Field(description="O problema central que resolve")
-    solucao_proposta: str = Field(description="A solução proposta sintetizada")
-    beneficios: BeneficiosProposta = Field(description="Categorização dos benefícios")
-    diferenciais_unicos: List[str] = Field(description="Diferenciais únicos vs. concorrência")
+    declaracao: str = Field(description="Declaração de valor impactante")
+    problema_central: str = Field(description="O problema 'dor de cabeça' que resolve")
+    solucao_proposta: str = Field(description="A solução e como ela resolve o problema")
+    diferenciais_unicos: List[str] = Field(description="Por que somos melhores que o 'status quo'")
 
-class NotaConcorrente(BaseModel):
-    nome: str = Field(description="Nome do concorrente")
-    preco: float = Field(description="Nota (0-10): Competitividade de preço")
-    qualidade: float = Field(description="Nota (0-10): Qualidade do produto/serviço")
-    atendimento: float = Field(description="Nota (0-10): Qualidade do atendimento")
-    tecnologia: float = Field(description="Nota (0-10): Nível tecnológico")
-    marca: float = Field(description="Nota (0-10): Força da marca")
-    nota_media: float = Field(description="Média das notas")
+class CompetitorMatrixItem(BaseModel):
+    name: str = Field(description="Nome do concorrente")
+    convenience: float = Field(description="Nota 1-10: Conveniência")
+    innovation: float = Field(description="Nota 1-10: Inovação")
+    price: float = Field(description="Nota 1-10: Preço (10 = mais competitivo)")
+    quality: float = Field(description="Nota 1-10: Qualidade")
+    support: float = Field(description="Nota 1-10: Suporte")
+    technology: float = Field(description="Nota 1-10: Tecnologia")
+    average_score: float = Field(description="Média das notas")
 
 class AnaliseConcorrencia(BaseModel):
-    nosso_negocio: NotaConcorrente = Field(description="Notas do nosso negócio")
-    concorrente_1: NotaConcorrente = Field(description="Notas do concorrente direto 1")
-    concorrente_2: NotaConcorrente = Field(description="Notas do concorrente direto 2")
-    estrategia_defensiva: str = Field(description="Nossa estratégia para nos protegermos ou nos diferenciarmos desses concorrentes")
-    conclusao: str = Field(description="Conclusão comparativa: onde ganhamos e onde perdemos")
+    competitor_matrix: List[CompetitorMatrixItem] = Field(description="Matriz comparativa com 2 concorrentes reais + o seu negócio")
+    estrategia_defensiva: str = Field(description="Como vamos nos diferenciar e nos proteger no mercado")
 
 class ProblemaSolucao(BaseModel):
-    proposta_valor: PropostaValor = Field(description="A proposta de valor estruturada")
-    analise_concorrencia: AnaliseConcorrencia = Field(description="Tabela comparativa com concorrentes")
+    proposta_valor: PropostaValor = Field(description="Mapeamento da Proposta de Valor")
+    analise_concorrencia: AnaliseConcorrencia = Field(description="Análise da concorrência e diferencial")
 
 # ============================================================
 # MÓDULO 3: ESTRATÉGIA (SWOT EXPANDIDA)
 # ============================================================
 
 class ItemSWOT(BaseModel):
-    descricao: str = Field(description="Descrição do fator")
-    impacto: str = Field(description="Impacto: 'alto' ou 'baixo'")
-    acao_estrategica: str = Field(description="Ação estratégica recomendada para lidar com este fator")
+    descricao: str = Field(description="Descrição do fator (Força, Fraqueza, etc.)")
+    impact_level: str = Field(description="Nível de Impacto: High ou Low")
+    strategic_action: str = Field(description="Ação estratégica concreta")
 
 class MatrizSWOTExpandida(BaseModel):
-    forcas: List[ItemSWOT] = Field(description="Forças internas do negócio com impacto e ação")
-    fraquezas: List[ItemSWOT] = Field(description="Fraquezas internas com impacto e ação")
-    oportunidades: List[ItemSWOT] = Field(description="Oportunidades externas com impacto e ação")
-    ameacas: List[ItemSWOT] = Field(description="Ameaças externas com impacto e ação")
+    forcas: List[ItemSWOT]
+    fraquezas: List[ItemSWOT]
+    oportunidades: List[ItemSWOT]
+    ameacas: List[ItemSWOT]
 
 class Estrategia(BaseModel):
-    missao: str = Field(description="Missão do negócio")
-    visao: str = Field(description="Visão de longo prazo do negócio (3-5 anos)")
-    valores: List[str] = Field(description="Valores fundamentais da empresa")
-    pilares_culturais: str = Field(description="Explicação de como a cultura da empresa suporta a execução da estratégia")
-    swot: MatrizSWOTExpandida = Field(description="Matriz SWOT detalhada com ações estratégicas")
-    objetivos_smart: List[str] = Field(description="Até 5 objetivos SMART para os primeiros 12 meses")
+    missao: str
+    visao: str
+    valores: List[str]
+    pilares_culturais: str = Field(description="Como a cultura suporta a estratégia")
+    swot: MatrizSWOTExpandida = Field(description="SWOT com impacto e ações")
+    objetivos_smart: List[str] = Field(description="5 metas claras para o primeiro ano")
 
 # ============================================================
-# MÓDULO 4: FINANÇAS (PNBOX COMPLETO)
+# MÓDULO 4: MARKETING & VENDAS (GROWTH)
 # ============================================================
 
-class ItemInvestimento(BaseModel):
-    descricao: str = Field(description="Nome do item de investimento")
-    valor: float = Field(description="Valor em Reais")
+class SalesFunnelStage(BaseModel):
+    stage_name: str = Field(description="Stage: Top, Middle ou Bottom")
+    description: str = Field(description="O que acontece nesta etapa (AIDA)")
+    invested_budget: float = Field(description="Orçamento investido na etapa (R$)")
+    reached_people: int = Field(description="Pessoas alcançadas")
+    call_to_action_people: int = Field(description="Pessoas que realizaram o CTA")
+    cac: float = Field(description="CAC específico da etapa")
+    conversion_rate: float = Field(description="Taxa de conversão (%)")
 
-class InvestimentoFixo(BaseModel):
-    itens: List[ItemInvestimento] = Field(description="Lista de investimentos fixos (equipamentos, software, etc.)")
-    total: float = Field(description="Total do investimento fixo")
+class SalesFunnel(BaseModel):
+    top: SalesFunnelStage
+    middle: SalesFunnelStage
+    bottom: SalesFunnelStage
+    global_cac: float
+    ltv: float
+    ltv_cac_ratio: float
 
-class CapitalGiro(BaseModel):
-    estoque_inicial: float = Field(description="Valor do estoque inicial (se aplicável)")
-    caixa_minimo: float = Field(description="Caixa mínimo necessário para operar nos primeiros meses")
-    total: float = Field(description="Total do capital de giro necessário")
+class ExperimentHypothesis(BaseModel):
+    hypothesis_description: str
+    validation_method: str
+    success_metric: str
+    deadline: int = Field(description="Prazo em dias")
+    status: str = Field(description="Status: Pendente, Validado, Invalidado")
 
-class ItemCusto(BaseModel):
-    descricao: str = Field(description="Nome do custo")
-    valor_mensal: float = Field(description="Valor mensal em Reais")
-
-class CustosFixos(BaseModel):
-    itens: List[ItemCusto] = Field(description="Lista de custos fixos mensais (aluguel, salários, cloud, etc.)")
-    total_mensal: float = Field(description="Total de custos fixos mensais")
-
-class CustosVariaveis(BaseModel):
-    itens: List[ItemCusto] = Field(description="Lista de custos variáveis (comissões, taxas, etc.)")
-    percentual_sobre_receita: float = Field(description="Percentual médio dos custos variáveis sobre a receita")
-    total_estimado_mensal: float = Field(description="Total estimado de custos variáveis mensais no cenário base")
-
-class MesDRE(BaseModel):
-    mes: int = Field(description="Mês (1 a 12)")
-    receita_bruta: float = Field(description="Receita bruta projetada")
-    deducoes: float = Field(description="Deduções (impostos sobre receita)")
-    receita_liquida: float = Field(description="Receita líquida")
-    custos_variaveis: float = Field(description="Custos variáveis do mês")
-    margem_contribuicao: float = Field(description="Margem de contribuição")
-    custos_fixos: float = Field(description="Custos fixos do mês")
-    lucro_operacional: float = Field(description="Lucro/Prejuízo operacional")
-
-class DRE_Anual(BaseModel):
-    projecao_mensal: List[MesDRE] = Field(description="Projeção mês a mês dos primeiros 12 meses")
-    receita_anual_total: float = Field(description="Receita bruta anual total")
-    lucro_anual_total: float = Field(description="Lucro/Prejuízo operacional anual total")
-
-class Indicadores(BaseModel):
-    lucratividade_percentual: float = Field(description="Lucratividade (%) = Lucro Líquido / Receita Total * 100")
-    rentabilidade_percentual: float = Field(description="Rentabilidade (%) = Lucro Líquido / Investimento Total * 100")
-    payback_meses: float = Field(description="Prazo de retorno do investimento em meses")
-    ponto_equilibrio_faturamento: float = Field(description="Faturamento mensal mínimo para cobrir custos (R$)")
-    ponto_equilibrio_unidades: float = Field(description="Quantidade de unidades/assinaturas para atingir equilíbrio")
-    roi_anual: float = Field(description="ROI anual estimado (%)")
-
-class Financas(BaseModel):
-    investimento_total: float = Field(description="Soma: Investimento Fixo + Capital de Giro")
-    investimento_fixo: InvestimentoFixo = Field(description="Detalhamento do investimento fixo")
-    capital_giro: CapitalGiro = Field(description="Detalhamento do capital de giro")
-    custos_fixos: CustosFixos = Field(description="Detalhamento de custos fixos mensais")
-    custos_variaveis: CustosVariaveis = Field(description="Detalhamento de custos variáveis")
-    dre_anual: DRE_Anual = Field(description="DRE projetada para 12 meses")
-    indicadores: Indicadores = Field(description="Indicadores de viabilidade")
-    comentarios_financeiros: str = Field(description="Comentários narrativos sobre a saúde financeira e lógica das projeções")
+class MarketingPlan(BaseModel):
+    sales_funnel: SalesFunnel = Field(description="Funil de vendas detalhado AIDA")
+    experiment_board: List[ExperimentHypothesis] = Field(description="Quadro de experimentação")
 
 # ============================================================
-# MÓDULO 5: FERRAMENTAS COMPLEMENTARES (MARKETING & GROWTH)
+# MÓDULO 5: FINANÇAS (DRE 12 MESES)
 # ============================================================
 
-class CanalAquisicao(BaseModel):
-    nome: str = Field(description="Nome do canal (ex: Meta Ads, SEO, Outbound)")
-    nota_atratividade: float = Field(description="Nota (0-10): Quão atrativo é este canal")
-    nota_alcance: float = Field(description="Nota (0-10): Potencial de alcance")
-    custo_estimado_mensal: float = Field(description="Investimento mensal estimado neste canal (R$)")
-    estrategia: str = Field(description="Breve estratégia de uso do canal")
+class FinancialInvestment(BaseModel):
+    item: str
+    value: float
 
-class EtapaFunil(BaseModel):
-    nome: str = Field(description="Nome da etapa (Topo, Meio, Fundo)")
-    descricao: str = Field(description="Descrição do que acontece nesta etapa")
-    taxa_conversao_estimada: float = Field(description="Taxa de conversão estimada (%)")
-    acoes: List[str] = Field(description="Ações específicas para esta etapa")
-    metricas_chave: List[str] = Field(description="KPIs para monitorar esta etapa")
+class FinancialScenario(BaseModel):
+    scenario_name: str = Field(description="Optimistic, Pessimistic ou Probable")
+    estimated_revenue: float
+    estimated_profit: float
+    justification: str
 
-class FunilVendas(BaseModel):
-    topo: EtapaFunil = Field(description="Topo do funil (Awareness)")
-    meio: EtapaFunil = Field(description="Meio do funil (Consideração)")
-    fundo: EtapaFunil = Field(description="Fundo do funil (Conversão)")
-    cac_projetado: float = Field(description="Custo de Aquisição de Cliente projetado (R$)")
-    ltv_projetado: float = Field(description="Lifetime Value projetado (R$)")
-    razao_ltv_cac: float = Field(description="Razão LTV/CAC (ideal > 3)")
+class DREMonth(BaseModel):
+    month_name: str = Field(description="Mês (ex: Mês 1)")
+    revenue: float = Field(description="Receita Bruta")
+    taxes: float = Field(description="Impostos")
+    variable_costs: float = Field(description="Custos Variáveis")
+    contribution_margin: float = Field(description="Margem de Contribuição")
+    fixed_costs: float = Field(description="Custos Fixos")
+    net_profit: float = Field(description="Lucro Líquido")
 
-class HipoteseExperimentacao(BaseModel):
-    hipotese: str = Field(description="Hipótese a ser validada")
-    metodo_validacao: str = Field(description="Como será validada (entrevista, MVP, teste A/B, etc.)")
-    metrica_sucesso: str = Field(description="Métrica que define sucesso")
-    prazo_dias: int = Field(description="Prazo para validação em dias")
-    status: str = Field(description="Status: 'pendente', 'em_validacao' ou 'validada'")
-
-class QuadroExperimentacao(BaseModel):
-    hipoteses: List[HipoteseExperimentacao] = Field(description="Lista de hipóteses de negócio a validar")
-
-class FerramentasComplementares(BaseModel):
-    canais_aquisicao: List[CanalAquisicao] = Field(description="Análise dos canais de aquisição com notas")
-    funil_vendas: FunilVendas = Field(description="Funil de vendas completo com métricas")
-    quadro_experimentacao: QuadroExperimentacao = Field(description="Quadro de experimentação com hipóteses")
+class FinancialPlan(BaseModel):
+    fixed_investments: List[FinancialInvestment]
+    pre_operational_investments: List[FinancialInvestment]
+    working_capital: float
+    dre_12_months: List[DREMonth] = Field(description="Projeção mês a mês por um ano")
+    scenarios: List[FinancialScenario] = Field(description="Cenários: Otimista, Pessimista, Provável")
+    viability_indicators: Dict[str, float] = Field(description="ROI, Payback, Break-even, Lucratividade")
+    comentarios_financeiros: str = Field(description="Análise narrativa densa")
 
 # ============================================================
 # MÓDULO 6: OPERAÇÕES
 # ============================================================
 
 class PlanoOperacional(BaseModel):
-    atividades_chaves: List[str] = Field(description="Atividades-chave diárias do negócio")
-    parceiros_chaves: List[str] = Field(description="Parceiros e fornecedores essenciais")
-    infraestrutura: str = Field(description="Necessidades de infraestrutura (física e tecnológica)")
-    aspectos_legais: str = Field(description="Licenças, alvarás e regulamentações necessárias")
-    quadro_equipe: List[str] = Field(description="Posições necessárias na equipe inicial")
+    atividades_chaves: List[str]
+    parceiros_chaves: List[str]
+    infraestrutura: str
+    aspectos_legais: str
+    quadro_equipe: List[str]
 
 # ============================================================
 # MASTER SCHEMA: S7teBusinessPlanV2
 # ============================================================
 
-class S7teBusinessPlanV2(BaseModel):
-    """Schema mestre que unifica todos os 6 módulos do Plano de Negócios S7te Digital (Padrão PNBOX)."""
-    sumario_executivo: str = Field(description="Resumo executivo denso e completo (mínimo 3 parágrafos)")
-    cliente_mercado: ClienteMercado = Field(description="Módulo 1: Análise de Cliente e Mercado")
-    problema_solucao: ProblemaSolucao = Field(description="Módulo 2: Problema, Solução e Concorrência")
-    estrategia: Estrategia = Field(description="Módulo 3: Estratégia (SWOT, Visão, Missão)")
-    financas: Financas = Field(description="Módulo 4: Finanças (Investimento, DRE, Indicadores)")
-    ferramentas: FerramentasComplementares = Field(description="Módulo 5: Ferramentas de Marketing e Growth")
-    operacional: PlanoOperacional = Field(description="Módulo 6: Plano Operacional")
+class S7teBusinessPlanV3(BaseModel):
+    """Schema Master V3.0 - Padrão SEBRAE PNBOX High Density."""
+    sumario_executivo: str = Field(description="Resumo executivo denso e estratégico (Benchmark: CÍTTRICA IA)")
+    cliente_mercado: ClienteMercado
+    problema_solucao: ProblemaSolucao
+    estrategia: Estrategia
+    marketing: MarketingPlan
+    financas: FinancialPlan
+    operacional: PlanoOperacional

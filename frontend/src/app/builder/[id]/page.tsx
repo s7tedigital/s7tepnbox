@@ -63,8 +63,12 @@ export default function BuilderPage() {
             <BrainCircuit className="h-5 w-5 text-white" />
           </div>
           <div>
-            <h1 className="font-semibold text-zinc-100 tracking-tight">S7te Plan Builder v2.2</h1>
-            <p className="text-xs text-slate-500 mt-1">S7te Plan Builder v2.2 (Densidade PNBOX)</p>
+            <p className="text-gray-400 mt-2 text-sm italic">
+            Versão v3.0 (PNBOX Full Density - 74-Page Standard)
+          </p>
+          <p className="text-xs text-blue-400 mt-1">
+            Plano ultra-detalhado com Biografia de Persona, Matriz de Concorrência e DRE 12 Meses.
+          </p>
           </div>
         </div>
         <div className="flex items-center gap-2">

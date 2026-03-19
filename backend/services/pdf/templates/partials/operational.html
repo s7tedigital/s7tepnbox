@@ -1,43 +1,78 @@
 <h1 class="chapter-title" id="operational">4. Estratégia e Plano Operacional</h1>
 
-<div class="highlight-box">
-    <h3>Cultura e Identidade</h3>
-    <p><strong>Missão:</strong> {{ plan.estrategia.missao }}</p>
-    <p><strong>Visão:</strong> {{ plan.estrategia.visao }}</p>
-    <p><strong>Valores:</strong> {{ plan.estrategia.valores | join(', ') }}</p>
-    <hr>
-    <p><strong>Pilares Culturais:</strong><br>
-    {{ plan.estrategia.pilares_culturais | default('A cultura organizacional está sendo definida...') | replace('\n', '<br>') }}</p>
+<h2>Cultura e Direcionamento Estratégico</h2>
+<p>Nossa fundação cultural é o que garante a execução consistente da nossa proposta de valor no longo prazo.</p>
+
+<div class="highlight-box" style="display: flex; gap: 20px; background: #fdf2f8; border-left-color: #db2777;">
+    <div style="flex: 1;">
+        <strong>Missão:</strong><br>
+        <p style="font-size: 10pt; font-style: italic;">"{{ plan.estrategia.missao }}"</p>
+        <br>
+        <strong>Visão (Long Prazo):</strong><br>
+        <p style="font-size: 10pt;">{{ plan.estrategia.visao }}</p>
+    </div>
+    <div style="flex: 1; border-left: 1px solid #f9a8d4; padding-left: 20px;">
+        <strong>Valores Fundamentais:</strong>
+        <ul style="font-size: 9pt; margin-top: 5px;">
+            {% for val in plan.estrategia.valores %}
+            <li>{{ val }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 
-<h2>Atividades-Chave Operacionais</h2>
-<table class="financial-table">
-    {% for activity in plan.operacional.atividades_chaves %}
-    <tr><td>{{ activity }}</td></tr>
-    {% endfor %}
-</table>
-
-<h2>Parceiros e Fornecedores Estratégicos</h2>
-<table class="financial-table">
-    {% for partner in plan.operacional.parceiros_chaves %}
-    <tr><td>{{ partner }}</td></tr>
-    {% endfor %}
-</table>
-
-<h2>Infraestrutura e Tecnologia</h2>
-<div class="highlight-box">
-    {{ plan.operacional.infraestrutura | replace('\n', '<br>') }}
+<div class="highlight-box" style="border-left-color: #be185d; margin-top: 10px;">
+    <strong>Pilares Culturais e Execução:</strong><br>
+    <p style="font-size: 10pt;">{{ plan.estrategia.pilares_culturais }}</p>
 </div>
 
-<h2>Gestão de Pessoas e Aspectos Jurídicos</h2>
-<p><strong>Quadro de Equipe Inicial:</strong></p>
-<ul>
-{% for member in plan.operacional.quadro_equipe %}
-    <li>{{ member }}</li>
-{% endfor %}
-</ul>
+<h2>Objetivos SMART (Primeiros 12 Meses)</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
+    {% for obj in plan.estrategia.objetivos_smart %}
+    <div style="background: #fff; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; flex: 1; min-width: 150px; font-size: 9pt; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <strong>Meta {{ loop.index }}:</strong><br>
+        {{ obj }}
+    </div>
+    {% endfor %}
+</div>
 
-<div class="highlight-box" style="margin-top: 20px; border-left: 4px solid #ef4444;">
-    <strong>Aspectos Legais e Regulamentações:</strong><br/>
-    {{ plan.operacional.aspectos_legais | replace('\n', '<br>') }}
+<h2 style="page-break-before: always;">Detalhamento Operacional (PNBOX)</h2>
+<table class="financial-table">
+    <thead>
+        <tr>
+            <th style="width: 25%;">Atividades-Chave</th>
+            <th style="width: 25%;">Parceiros Essenciais</th>
+            <th style="width: 25%;">Infraestrutura e Tech</th>
+            <th style="width: 25%;">Aspectos Legais</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <ul style="margin: 0; padding-left: 15px; font-size: 8pt;">
+                    {% for act in plan.operacional.atividades_chaves %}
+                    <li>{{ act }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul style="margin: 0; padding-left: 15px; font-size: 8pt;">
+                    {% for part in plan.operacional.parceiros_chaves %}
+                    <li>{{ part }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td style="font-size: 8pt;">{{ plan.operacional.infraestrutura }}</td>
+            <td style="font-size: 8pt;">{{ plan.operacional.aspectos_legais }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Estrutura de Equipe Inicial</h3>
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    {% for cargo in plan.operacional.quadro_equipe %}
+    <div style="padding: 6px 12px; background: #f1f5f9; border-radius: 15px; font-size: 9pt; border: 1px solid #cbd5e1;">
+        <strong>{{ cargo }}</strong>
+    </div>
+    {% endfor %}
 </div>

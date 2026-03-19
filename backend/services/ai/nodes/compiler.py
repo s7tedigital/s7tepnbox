@@ -1,7 +1,7 @@
 from typing import Dict, Any
 from langchain_core.messages import SystemMessage, HumanMessage
 from services.ai.nodes.orchestrator import get_gemini_model
-from api.schemas.plan import S7teBusinessPlanV2
+from api.schemas.plan import S7teBusinessPlanV3
 
 def compiler_node(state: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -50,29 +50,29 @@ def compiler_node(state: Dict[str, Any]) -> Dict[str, Any]:
             executive_summary = "Sumário executivo não pôde ser gerado automaticamente."
         
         # Assembla o Master JSON diretamente
-        v2_plan = {
+        v3_plan = {
             "sumario_executivo": executive_summary,
             "cliente_mercado": market,
             "problema_solucao": problem,
             "estrategia": strategy,
+            "marketing": marketing,
             "financas": financial,
-            "ferramentas": marketing,
             "operacional": operational
         }
         
         # Valida com Pydantic
         try:
-            validated = S7teBusinessPlanV2(**v2_plan)
+            validated = S7teBusinessPlanV3(**v3_plan)
             final_plan = validated.model_dump()
         except Exception:
             # Se a validação falhar, usa o dict cru mesmo
-            final_plan = v2_plan
+            final_plan = v3_plan
         
         new_context = state.get("business_context", {})
-        new_context["v2_plan"] = final_plan
+        new_context["v2_plan"] = final_plan # Mantemos o nome da chave no context para não quebrar o resto do fluxo
         
         return {
-            "messages": [SystemMessage(content="O Plano Executivo S7te V2.1 (densidade PNBOX) foi compilado com sucesso!")],
+            "messages": [SystemMessage(content="O Plano Executivo S7te V3.0 (Alta Densidade PNBOX) foi compilado com sucesso!")],
             "business_context": new_context
         }
     else:
@@ -87,7 +87,7 @@ def compiler_node(state: Dict[str, Any]) -> Dict[str, Any]:
                 f"--- Strategy ---\n{strategy}\n\n"
                 f"--- Operational Plan ---\n{operational}\n\n"
                 f"--- Financial Projection ---\n{financial}\n\n"
-                "RESPONDA EXCLUSIVAMENTE COM JSON VALIDAMENTE FORMATADO que represente a estrutura do S7teBusinessPlanV2 inteiro.\n"
+                "RESPONDA EXCLUSIVAMENTE COM JSON VALIDAMENTE FORMATADO que represente a estrutura do S7teBusinessPlanV3 inteiro.\n"
                 "NÃO INCLUA BLOCOS DE MARKDOWN COMO ```json E NÃO INCLUA NENHUM COMENTÁRIO EM TEXTO."
             )
         )
@@ -97,7 +97,7 @@ def compiler_node(state: Dict[str, Any]) -> Dict[str, Any]:
         try:
             structured_plan_response = llm.invoke([
                 compiler_prompt,
-                HumanMessage(content="Nós especialistas divergiram ou falharam. Analise o rascunho de todos e forneça o JSON puro e consolidado final do S7teBusinessPlanV2, corrigindo eventuais vazios.")
+                HumanMessage(content="Nós especialistas divergiram ou falharam. Analise o rascunho de todos e forneça o JSON puro e consolidado final do S7teBusinessPlanV3 (PNBOX 74 Páginas), corrigindo eventuais vazios.")
             ])
             
             import json_repair
@@ -113,7 +113,7 @@ def compiler_node(state: Dict[str, Any]) -> Dict[str, Any]:
             
             # Valida com Pydantic apenas para tipagem, se falhar engole o erro e aprova o dict cru
             try:
-                validated = S7teBusinessPlanV2(**plan_dict)
+                validated = S7teBusinessPlanV3(**plan_dict)
                 final_plan = validated.model_dump()
             except Exception:
                 final_plan = plan_dict
