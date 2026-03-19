@@ -20,10 +20,11 @@ export default function BuilderPage() {
 
   // Auto-scroll
   useEffect(() => {
+    console.log("[S7te] BuilderPage rendered. Messages:", messages.length, "pdfUrl:", pdfUrl);
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, pdfUrl]);
 
   const downloadPdf = async (url: string) => {
     try {
