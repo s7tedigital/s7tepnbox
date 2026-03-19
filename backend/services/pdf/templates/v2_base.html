@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>S7te Plan Builder V2.0</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+            @bottom-right {
+                content: counter(page);
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                font-size: 10pt;
+                color: #666;
+            }
+            @bottom-left {
+                content: "S7te Digital | AI First Business Plan";
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                font-size: 10pt;
+                color: #666;
+            }
+        }
+        
+        @page :first {
+            @bottom-right { content: ""; }
+            @bottom-left { content: ""; }
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Capa */
+        .cover-page {
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            margin-top: 30%;
+        }
+        .cover-page h1 {
+            font-size: 48pt;
+            color: #111;
+            margin-bottom: 10px;
+        }
+        .cover-page h2 {
+            font-size: 24pt;
+            color: #555;
+            font-weight: 300;
+        }
+        
+        h1.chapter-title {
+            page-break-before: always;
+            font-size: 28pt;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h2 { font-size: 20pt; color: #222; margin-top: 30px; }
+        h3 { font-size: 16pt; color: #444; }
+
+        /* TOC */
+        .toc-page {
+            page-break-after: always;
+        }
+        ul.toc {
+            list-style-type: none;
+            padding: 0;
+            font-size: 14pt;
+        }
+        ul.toc li {
+            margin-bottom: 15px;
+        }
+        ul.toc a {
+            text-decoration: none;
+            color: #000;
+        }
+        ul.toc a::after {
+            content: leader('.') target-counter(attr(href), page);
+        }
+
+        /* Grids e Tabelas */
+        .swot-grid {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .swot-grid td {
+            width: 50%;
+            padding: 20px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+        .swot-title {
+            font-weight: bold;
+            font-size: 16pt;
+            margin-bottom: 10px;
+        }
+        .swot-s { background-color: #e6f4ea; } /* Strengths */
+        .swot-w { background-color: #fce8e6; } /* Weaknesses */
+        .swot-o { background-color: #e8f0fe; } /* Opportunities */
+        .swot-t { background-color: #fef7e0; } /* Threats */
+
+        table.financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            font-size: 10pt;
+        }
+        table.financial-table th, table.financial-table td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        table.financial-table th {
+            background-color: #1e293b;
+            color: #ffffff;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 9pt;
+        }
+
+        .highlight-box {
+            background-color: #f1f5f9;
+            border-left: 6px solid #4f46e5;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+        
+        .highlight-box p { margin: 5px 0; }
+        
+        hr { border: 0; border-top: 1px solid #cbd5e1; margin: 15px 0; }
+
+        /* Typography */
+        h1, h2, h3 { color: #0f172a; }
+        h1.chapter-title { border-bottom: 4px solid #4f46e5; margin-bottom: 30px; }
+        
+        small { color: #64748b; }
+    </style>
+</head>
+<body>
+
+    <!-- Capa -->
+    <div class="cover-page">
+        <h1>S7te Plan Builder</h1>
+        <h2>Plano de Negócios Executivo V2.0</h2>
+        <p style="margin-top: 50px; color: #777;">Gerado por Inteligência Artificial Especializada</p>
+    </div>
+
+    <!-- Sumário -->
+    <div class="toc-page">
+        <h1 class="chapter-title">Resumo Executivo</h1>
+        <ul class="toc">
+            <li><a href="#executive">1. Sumário Executivo</a></li>
+            <li><a href="#market">2. Análise de Mercado</a></li>
+            <li><a href="#marketing">3. Plano de Marketing</a></li>
+            <li><a href="#operational">4. Plano Operacional</a></li>
+            <li><a href="#financial">5. Projeção Financeira</a></li>
+        </ul>
+    </div>
+
+    <!-- Capítulos -->
+    <h1 class="chapter-title" id="executive">1. Sumário Executivo</h1>
+    <p>{{ plan.sumario_executivo | default('Sumário executivo não disponível. O plano foi gerado com dados parciais.') | replace('\n', '<br>') }}</p>
+
+    <!-- Includes dos partials -->
+    {% include 'partials/market.html' %}
+    {% include 'partials/marketing.html' %}
+    {% include 'partials/operational.html' %}
+    {% include 'partials/financial.html' %}
+
+</body>
+</html>

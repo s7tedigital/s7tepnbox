@@ -1,0 +1,124 @@
+<h1 class="chapter-title" id="market">2. Análise de Mercado</h1>
+
+<h2>Segmentação de Mercado</h2>
+<table class="financial-table">
+    <thead>
+        <tr>
+            <th>Segmento</th>
+            <th>Tamanho</th>
+            <th>Lucro</th>
+            <th>Tendência</th>
+            <th>Concorrência</th>
+            <th>Aderência</th>
+            <th>Média</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Principal:</strong> {{ plan.cliente_mercado.segmentacao.segmento_principal }}</td>
+            <td>{{ plan.cliente_mercado.segmentacao.criterios_principal.tamanho_mercado }}</td>
+            <td>{{ plan.cliente_mercado.segmentacao.criterios_principal.margem_lucro }}</td>
+            <td>{{ plan.cliente_mercado.segmentacao.criterios_principal.tendencia_crescimento }}</td>
+            <td>{{ plan.cliente_mercado.segmentacao.criterios_principal.nivel_concorrencia }}</td>
+            <td>{{ plan.cliente_mercado.segmentacao.criterios_principal.aderencia_solucao }}</td>
+            <td><strong>{{ plan.cliente_mercado.segmentacao.criterios_principal.nota_total }}</strong></td>
+        </tr>
+    </tbody>
+</table>
+<p><em>Justificativa: {{ plan.cliente_mercado.segmentacao.justificativa }}</em></p>
+
+<h2>Público-Alvo e Persona</h2>
+<div class="highlight-box">
+    <p><strong>Nome:</strong> {{ plan.cliente_mercado.persona.nome_ficticio | default('') }}</p>
+    <p><strong>Perfil:</strong> {{ plan.cliente_mercado.persona.idade }} anos, {{ plan.cliente_mercado.persona.genero }}, {{ plan.cliente_mercado.persona.profissao }}</p>
+    <p><strong>Renda/Local:</strong> {{ plan.cliente_mercado.persona.renda_mensal }} | {{ plan.cliente_mercado.persona.localizacao }}</p>
+    <hr>
+    <p><strong>Fluência Digital:</strong> {{ plan.cliente_mercado.persona.fluencia_digital }}</p>
+    <p><strong>Canais:</strong> {{ plan.cliente_mercado.persona.canais_preferidos | default([]) | join(', ') }}</p>
+    <p style="font-style: italic; color: #6366f1;">"{{ plan.cliente_mercado.persona.frase_marcante }}"</p>
+</div>
+
+<h3>Rotina da Persona</h3>
+<table class="financial-table">
+    <tr>
+        <td style="width: 33%;"><strong>Manhã</strong><br>{{ plan.cliente_mercado.persona.rotina_manha }}</td>
+        <td style="width: 33%;"><strong>Tarde</strong><br>{{ plan.cliente_mercado.persona.rotina_tarde }}</td>
+        <td style="width: 33%;"><strong>Noite</strong><br>{{ plan.cliente_mercado.persona.rotina_noite }}</td>
+    </tr>
+</table>
+
+<h2>Mapeamento da Jornada do Cliente</h2>
+<table class="financial-table" style="font-size: 9pt;">
+    <thead>
+        <tr>
+            <th>Etapa</th>
+            <th>O que faz/sente</th>
+            <th>Pontos de Contato</th>
+            <th>Emoções</th>
+            <th>Oportunidades</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Antes</strong></td>
+            <td>{{ plan.cliente_mercado.jornada.antes.descricao }}</td>
+            <td>{{ plan.cliente_mercado.jornada.antes.pontos_de_contato | join(', ') }}</td>
+            <td>{{ plan.cliente_mercado.jornada.antes.emocoes }}</td>
+            <td>{{ plan.cliente_mercado.jornada.antes.oportunidades | join(', ') }}</td>
+        </tr>
+        <tr>
+            <td><strong>Durante</strong></td>
+            <td>{{ plan.cliente_mercado.jornada.durante.descricao }}</td>
+            <td>{{ plan.cliente_mercado.jornada.durante.pontos_de_contato | join(', ') }}</td>
+            <td>{{ plan.cliente_mercado.jornada.durante.emocoes }}</td>
+            <td>{{ plan.cliente_mercado.jornada.durante.oportunidades | join(', ') }}</td>
+        </tr>
+        <tr>
+            <td><strong>Depois</strong></td>
+            <td>{{ plan.cliente_mercado.jornada.depois.descricao }}</td>
+            <td>{{ plan.cliente_mercado.jornada.depois.pontos_de_contato | join(', ') }}</td>
+            <td>{{ plan.cliente_mercado.jornada.depois.emocoes }}</td>
+            <td>{{ plan.cliente_mercado.jornada.depois.oportunidades | join(', ') }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="page-break-before: always;">Matriz SWOT Expandida</h2>
+<table class="swot-grid">
+    <tr>
+        <td class="swot-s">
+            <div class="swot-title">Forças (Strengths)</div>
+            <ul>
+            {% for item in plan.estrategia.swot.forcas %}
+                <li><strong>{{ item.descricao }}</strong><br><small>Ação: {{ item.acao_estrategica }}</small></li>
+            {% endfor %}
+            </ul>
+        </td>
+        <td class="swot-w">
+            <div class="swot-title">Fraquezas (Weaknesses)</div>
+            <ul>
+            {% for item in plan.estrategia.swot.fraquezas %}
+                <li><strong>{{ item.descricao }}</strong><br><small>Ação: {{ item.acao_estrategica }}</small></li>
+            {% endfor %}
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td class="swot-o">
+            <div class="swot-title">Oportunidades</div>
+            <ul>
+            {% for item in plan.estrategia.swot.oportunidades %}
+                <li><strong>{{ item.descricao }}</strong><br><small>Ação: {{ item.acao_estrategica }}</small></li>
+            {% endfor %}
+            </ul>
+        </td>
+        <td class="swot-t">
+            <div class="swot-title">Ameaças (Threats)</div>
+            <ul>
+            {% for item in plan.estrategia.swot.ameacas %}
+                <li><strong>{{ item.descricao }}</strong><br><small>Ação: {{ item.acao_estrategica }}</small></li>
+            {% endfor %}
+            </ul>
+        </td>
+    </tr>
+</table>

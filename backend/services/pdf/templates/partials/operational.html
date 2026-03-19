@@ -1,0 +1,33 @@
+<h1 class="chapter-title" id="operational">4. Plano Operacional</h1>
+
+<h2>Atividades-Chave Operacionais</h2>
+<table class="financial-table">
+    {% for activity in plan.operacional.atividades_chaves %}
+    <tr><td>{{ activity }}</td></tr>
+    {% endfor %}
+</table>
+
+<h2>Parceiros e Fornecedores Estratégicos</h2>
+<table class="financial-table">
+    {% for partner in plan.operacional.parceiros_chaves %}
+    <tr><td>{{ partner }}</td></tr>
+    {% endfor %}
+</table>
+
+<h2>Infraestrutura e Tecnologia</h2>
+<div class="highlight-box">
+    {{ plan.operacional.infraestrutura | replace('\n', '<br>') }}
+</div>
+
+<h2>Gestão de Pessoas e Aspectos Jurídicos</h2>
+<p><strong>Quadro de Equipe Inicial:</strong></p>
+<ul>
+{% for member in plan.operacional.quadro_equipe %}
+    <li>{{ member }}</li>
+{% endfor %}
+</ul>
+
+<div class="highlight-box" style="margin-top: 20px; border-left: 4px solid #ef4444;">
+    <strong>Aspectos Legais e Regulamentações:</strong><br/>
+    {{ plan.operacional.aspectos_legais | replace('\n', '<br>') }}
+</div>

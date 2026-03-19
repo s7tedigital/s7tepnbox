@@ -1,0 +1,535 @@
+{
+  "sumario_executivo": "Este plano detalha a criação de um app de diagnóstico automotivo por IA...",
+  "cliente_mercado": {
+    "tam_sam_som": "TAM: 60M veículos no Brasil. SAM: 5M na Bahia. SOM: 1M em Salvador.",
+    "segmentacao": {
+      "segmento_principal": "Motoristas leigos de veículos populares fora da garantia",
+      "segmento_secundario": "Frotas de pequenas empresas em Salvador",
+      "criterios_principal": {
+        "tamanho_mercado": 8.0,
+        "margem_lucro": 7.0,
+        "tendencia_crescimento": 9.0,
+        "nivel_concorrencia": 8.0,
+        "aderencia_solucao": 9.0,
+        "nota_total": 41.0
+      },
+      "criterios_secundario": {
+        "tamanho_mercado": 6.0,
+        "margem_lucro": 8.0,
+        "tendencia_crescimento": 7.0,
+        "nivel_concorrencia": 6.0,
+        "aderencia_solucao": 7.0,
+        "nota_total": 34.0
+      },
+      "justificativa": "O segmento de motoristas leigos apresenta a maior dor e menor concorrência."
+    },
+    "persona": {
+      "nome_ficticio": "João Motorista",
+      "idade": 35,
+      "genero": "Masculino",
+      "renda_mensal": "R$ 3.000 - R$ 5.000",
+      "profissao": "Assistente Administrativo",
+      "localizacao": "Salvador, BA",
+      "dores_principais": [
+        "Medo de ser enganado na oficina",
+        "Não entende barulhos do carro"
+      ],
+      "desejos": [
+        "Sentir segurança ao ir à oficina",
+        "Não pagar caro por problema simples"
+      ],
+      "fluencia_digital": "Média",
+      "canais_preferidos": [
+        "WhatsApp",
+        "Instagram",
+        "YouTube"
+      ],
+      "rotina_manha": "Sai cedo de casa para o trabalho, pega trânsito na BR-324.",
+      "rotina_tarde": "Trabalha no escritório até 18h.",
+      "rotina_noite": "Assiste TV, navega no celular, cuida do carro no fim de semana.",
+      "frase_marcante": "Toda vez que escuto um barulho diferente, já fico tenso pensando no orçamento."
+    },
+    "jornada": {
+      "antes": {
+        "descricao": "Ouve barulho estranho",
+        "pontos_de_contato": [
+          "Google",
+          "WhatsApp amigos"
+        ],
+        "emocoes": "Medo, ansiedade",
+        "oportunidades": [
+          "Capturar via SEO",
+          "Ads segmentados"
+        ]
+      },
+      "durante": {
+        "descricao": "Usa o app para gravar e diagnosticar",
+        "pontos_de_contato": [
+          "App",
+          "Push notification"
+        ],
+        "emocoes": "Alívio, curiosidade",
+        "oportunidades": [
+          "Upsell de planos",
+          "Indicação de oficinas"
+        ]
+      },
+      "depois": {
+        "descricao": "Vai à oficina parceira com diagnóstico em mãos",
+        "pontos_de_contato": [
+          "Oficina parceira",
+          "Avaliação no app"
+        ],
+        "emocoes": "Confiança, satisfação",
+        "oportunidades": [
+          "Review no Google",
+          "Indicação amigos"
+        ]
+      }
+    }
+  },
+  "problema_solucao": {
+    "proposta_valor": {
+      "declaracao": "Diagnóstico veicular por IA que elimina o medo de ser enganado na oficina.",
+      "problema_central": "Motoristas leigos são enganados por oficinas desonestas.",
+      "solucao_proposta": "App que grava o barulho do motor e entrega um pré-diagnóstico inteligente.",
+      "beneficios": {
+        "funcionais": [
+          "Diagnóstico rápido em 30 segundos",
+          "Indicação de oficina parceira certificada"
+        ],
+        "emocionais": [
+          "Segurança ao negociar com mecânico",
+          "Sensação de controle"
+        ],
+        "sociais": [
+          "Status de pessoa inteligente que usa tecnologia"
+        ]
+      },
+      "diferenciais_unicos": [
+        "IA treinada com áudios reais",
+        "Rede de oficinas certificadas"
+      ]
+    },
+    "analise_concorrencia": {
+      "nosso_negocio": {
+        "nome": "AutoDiag IA",
+        "preco": 9.0,
+        "qualidade": 8.0,
+        "atendimento": 7.0,
+        "tecnologia": 10.0,
+        "marca": 5.0,
+        "nota_media": 7.8
+      },
+      "concorrente_1": {
+        "nome": "Doutor Carro",
+        "preco": 7.0,
+        "qualidade": 8.0,
+        "atendimento": 8.0,
+        "tecnologia": 6.0,
+        "marca": 9.0,
+        "nota_media": 7.6
+      },
+      "concorrente_2": {
+        "nome": "Oficina Zé",
+        "preco": 8.0,
+        "qualidade": 6.0,
+        "atendimento": 5.0,
+        "tecnologia": 3.0,
+        "marca": 4.0,
+        "nota_media": 5.2
+      },
+      "conclusao": "Ganhamos em tecnologia e preço. Perdemos em marca (somos novos)."
+    }
+  },
+  "estrategia": {
+    "visao": "Ser a maior plataforma de diagnóstico veicular da América Latina até 2029.",
+    "missao": "Democratizar o acesso à informação automotiva com IA.",
+    "valores": [
+      "Transparência",
+      "Inovação",
+      "Acessibilidade",
+      "Confiança"
+    ],
+    "swot": {
+      "forcas": [
+        {
+          "descricao": "IA proprietária de áudio",
+          "impacto": "alto",
+          "acao_estrategica": "Investir em mais dados de treinamento"
+        },
+        {
+          "descricao": "Baixo custo operacional",
+          "impacto": "alto",
+          "acao_estrategica": "Escalar rapidamente"
+        },
+        {
+          "descricao": "First mover no Brasil",
+          "impacto": "alto",
+          "acao_estrategica": "Patentear o modelo"
+        }
+      ],
+      "fraquezas": [
+        {
+          "descricao": "Marca desconhecida",
+          "impacto": "alto",
+          "acao_estrategica": "Investir em branding via influencers"
+        },
+        {
+          "descricao": "Dependência de APIs externas",
+          "impacto": "baixo",
+          "acao_estrategica": "Desenvolver modelo proprietário"
+        },
+        {
+          "descricao": "Equipe enxuta",
+          "impacto": "baixo",
+          "acao_estrategica": "Contratar após validação"
+        }
+      ],
+      "oportunidades": [
+        {
+          "descricao": "Mercado de oficinas ociosas",
+          "impacto": "alto",
+          "acao_estrategica": "Capturar via programa de parcerias"
+        },
+        {
+          "descricao": "Expansão B2B para seguradoras",
+          "impacto": "alto",
+          "acao_estrategica": "Criar API enterprise"
+        },
+        {
+          "descricao": "Regulação favorável ao consumidor",
+          "impacto": "baixo",
+          "acao_estrategica": "Alinhar comunicação"
+        }
+      ],
+      "ameacas": [
+        {
+          "descricao": "Grandes players lançarem app similar",
+          "impacto": "alto",
+          "acao_estrategica": "Acelerar crescimento e comunidade"
+        },
+        {
+          "descricao": "Montadoras fechando dados eletrônicos",
+          "impacto": "baixo",
+          "acao_estrategica": "Focar em veículos populares antigos"
+        },
+        {
+          "descricao": "Baixa adoção tecnológica do público",
+          "impacto": "baixo",
+          "acao_estrategica": "UX ultra simples"
+        }
+      ]
+    },
+    "objetivos_smart": [
+      "Atingir 500 downloads do app até o mês 3",
+      "Converter 26 oficinas parceiras pagantes até o mês 4",
+      "Alcançar faturamento mensal de R$ 10.000 até o mês 8",
+      "Obter NPS > 70 dos usuários até o mês 6",
+      "Fechar 1 parceria B2B com seguradora até o mês 12"
+    ]
+  },
+  "financas": {
+    "investimento_total": 50000.0,
+    "investimento_fixo": {
+      "itens": [
+        {
+          "descricao": "Treinamento Neural IA",
+          "valor": 40000.0
+        },
+        {
+          "descricao": "Desenvolvimento App MVP",
+          "valor": 5000.0
+        },
+        {
+          "descricao": "Equipamentos e licenças",
+          "valor": 3000.0
+        }
+      ],
+      "total": 48000.0
+    },
+    "capital_giro": {
+      "estoque_inicial": 0.0,
+      "caixa_minimo": 2000.0,
+      "total": 2000.0
+    },
+    "custos_fixos": {
+      "itens": [
+        {
+          "descricao": "Infraestrutura Cloud",
+          "valor_mensal": 1500.0
+        },
+        {
+          "descricao": "Marketing Digital",
+          "valor_mensal": 1000.0
+        }
+      ],
+      "total_mensal": 2500.0
+    },
+    "custos_variaveis": {
+      "itens": [
+        {
+          "descricao": "Taxa de processamento",
+          "valor_mensal": 50.0
+        }
+      ],
+      "percentual_sobre_receita": 5.0,
+      "total_estimado_mensal": 500.0
+    },
+    "dre_anual": {
+      "projecao_mensal": [
+        {
+          "mes": 1,
+          "receita_bruta": 0.0,
+          "deducoes": 0.0,
+          "receita_liquida": 0.0,
+          "custos_variaveis": 0.0,
+          "margem_contribuicao": 0.0,
+          "custos_fixos": 2500.0,
+          "lucro_operacional": -2500.0
+        },
+        {
+          "mes": 2,
+          "receita_bruta": 970.0,
+          "deducoes": 145.5,
+          "receita_liquida": 824.5,
+          "custos_variaveis": 48.5,
+          "margem_contribuicao": 776.0,
+          "custos_fixos": 2500.0,
+          "lucro_operacional": -1724.0
+        },
+        {
+          "mes": 3,
+          "receita_bruta": 1940.0,
+          "deducoes": 291.0,
+          "receita_liquida": 1649.0,
+          "custos_variaveis": 97.0,
+          "margem_contribuicao": 1552.0,
+          "custos_fixos": 2500.0,
+          "lucro_operacional": -948.0
+        },
+        {
+          "mes": 4,
+          "receita_bruta": 2910.0,
+          "deducoes": 436.5,
+          "receita_liquida": 2473.5,
+          "custos_variaveis": 145.5,
+          "margem_contribuicao": 2328.0,
+          "custos_fixos": 2500.0,
+          "lucro_operacional": -172.0
+        },
+        {
+          "mes": 5,
+          "receita_bruta": 4000.0,
+          "deducoes": 600.0,
+          "receita_liquida": 3400.0,
+          "custos_variaveis": 200.0,
+          "margem_contribuicao": 3200.0,
+          "custos_fixos": 2500.0,
+          "lucro_operacional": 700.0
+        },
+        {
+          "mes": 6,
+          "receita_bruta": 5500.0,
+          "deducoes": 825.0,
+          "receita_liquida": 4675.0,
+          "custos_variaveis": 275.0,
+          "margem_contribuicao": 4400.0,
+          "custos_fixos": 2500.0,
+          "lucro_operacional": 1900.0
+        },
+        {
+          "mes": 7,
+          "receita_bruta": 6500.0,
+          "deducoes": 975.0,
+          "receita_liquida": 5525.0,
+          "custos_variaveis": 325.0,
+          "margem_contribuicao": 5200.0,
+          "custos_fixos": 2500.0,
+          "lucro_operacional": 2700.0
+        },
+        {
+          "mes": 8,
+          "receita_bruta": 7500.0,
+          "deducoes": 1125.0,
+          "receita_liquida": 6375.0,
+          "custos_variaveis": 375.0,
+          "margem_contribuicao": 6000.0,
+          "custos_fixos": 2500.0,
+          "lucro_operacional": 3500.0
+        },
+        {
+          "mes": 9,
+          "receita_bruta": 8500.0,
+          "deducoes": 1275.0,
+          "receita_liquida": 7225.0,
+          "custos_variaveis": 425.0,
+          "margem_contribuicao": 6800.0,
+          "custos_fixos": 2500.0,
+          "lucro_operacional": 4300.0
+        },
+        {
+          "mes": 10,
+          "receita_bruta": 9500.0,
+          "deducoes": 1425.0,
+          "receita_liquida": 8075.0,
+          "custos_variaveis": 475.0,
+          "margem_contribuicao": 7600.0,
+          "custos_fixos": 2500.0,
+          "lucro_operacional": 5100.0
+        },
+        {
+          "mes": 11,
+          "receita_bruta": 10000.0,
+          "deducoes": 1500.0,
+          "receita_liquida": 8500.0,
+          "custos_variaveis": 500.0,
+          "margem_contribuicao": 8000.0,
+          "custos_fixos": 2500.0,
+          "lucro_operacional": 5500.0
+        },
+        {
+          "mes": 12,
+          "receita_bruta": 10000.0,
+          "deducoes": 1500.0,
+          "receita_liquida": 8500.0,
+          "custos_variaveis": 500.0,
+          "margem_contribuicao": 8000.0,
+          "custos_fixos": 2500.0,
+          "lucro_operacional": 5500.0
+        }
+      ],
+      "receita_anual_total": 67320.0,
+      "lucro_anual_total": 23856.0
+    },
+    "indicadores": {
+      "lucratividade_percentual": 35.4,
+      "rentabilidade_percentual": 47.7,
+      "payback_meses": 10.0,
+      "ponto_equilibrio_faturamento": 3125.0,
+      "ponto_equilibrio_unidades": 33.0,
+      "roi_anual": 166.5
+    }
+  },
+  "ferramentas": {
+    "canais_aquisicao": [
+      {
+        "nome": "TikTok Ads",
+        "nota_atratividade": 9.0,
+        "nota_alcance": 10.0,
+        "custo_estimado_mensal": 500.0,
+        "estrategia": "Vídeos virais de barulhos de carro"
+      },
+      {
+        "nome": "Meta Ads",
+        "nota_atratividade": 8.0,
+        "nota_alcance": 8.0,
+        "custo_estimado_mensal": 300.0,
+        "estrategia": "Segmentação local por CEP"
+      },
+      {
+        "nome": "SEO Local",
+        "nota_atratividade": 7.0,
+        "nota_alcance": 6.0,
+        "custo_estimado_mensal": 200.0,
+        "estrategia": "Blog com termos de busca automotivos"
+      }
+    ],
+    "funil_vendas": {
+      "topo": {
+        "nome": "Topo",
+        "descricao": "Atração via dor",
+        "taxa_conversao_estimada": 5.0,
+        "acoes": [
+          "Posts virais",
+          "Ads segmentados",
+          "SEO"
+        ],
+        "metricas_chave": [
+          "Impressões",
+          "CTR",
+          "CPC"
+        ]
+      },
+      "meio": {
+        "nome": "Meio",
+        "descricao": "Download do app",
+        "taxa_conversao_estimada": 20.0,
+        "acoes": [
+          "Onboarding gamificado",
+          "Push de valor",
+          "Tutorial"
+        ],
+        "metricas_chave": [
+          "Downloads",
+          "DAU",
+          "Retenção D7"
+        ]
+      },
+      "fundo": {
+        "nome": "Fundo",
+        "descricao": "Oficina paga assinatura",
+        "taxa_conversao_estimada": 10.0,
+        "acoes": [
+          "Apresentação comercial",
+          "Trial grátis",
+          "Case de sucesso"
+        ],
+        "metricas_chave": [
+          "MRR",
+          "Churn",
+          "LTV"
+        ]
+      },
+      "cac_projetado": 15.5,
+      "ltv_projetado": 970.0,
+      "razao_ltv_cac": 62.6
+    },
+    "quadro_experimentacao": {
+      "hipoteses": [
+        {
+          "hipotese": "Motoristas vão gravar sons do motor pelo celular",
+          "metodo_validacao": "MVP com 50 beta testers",
+          "metrica_sucesso": ">70% completam o fluxo",
+          "prazo_dias": 30,
+          "status": "pendente"
+        },
+        {
+          "hipotese": "Oficinas pagarão R$ 97/mês por leads",
+          "metodo_validacao": "Cold call para 20 oficinas",
+          "metrica_sucesso": ">30% aceitam trial",
+          "prazo_dias": 15,
+          "status": "pendente"
+        },
+        {
+          "hipotese": "A IA identifica problemas com >80% de acerto",
+          "metodo_validacao": "Teste com 200 áudios rotulados",
+          "metrica_sucesso": "Accuracy > 80%",
+          "prazo_dias": 45,
+          "status": "pendente"
+        }
+      ]
+    }
+  },
+  "operacional": {
+    "atividades_chaves": [
+      "Treinamento contínuo da IA",
+      "Auditoria de oficinas parceiras",
+      "Gestão de tráfego pago",
+      "Suporte ao usuário"
+    ],
+    "parceiros_chaves": [
+      "AWS/GCP",
+      "Sindirepa",
+      "OpenAI/Groq"
+    ],
+    "infraestrutura": "Servidores FastAPI, GPUs para inferência, PostgreSQL gerenciado.",
+    "aspectos_legais": "LGPD (dados de áudio), Termos de Uso, Isenção de responsabilidade mecânica.",
+    "quadro_equipe": [
+      "CTO (IA/ML)",
+      "Desenvolvedor Full-Stack",
+      "Growth Hacker",
+      "Comercial B2B"
+    ]
+  }
+}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Plano de Negócios S7te</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm;
+            @bottom-right {
+                content: counter(page);
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                font-size: 9pt;
+                color: #666;
+            }
+        }
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #6366f1;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #111827;
+            font-size: 24pt;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+        .header p {
+            color: #6366f1;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 10pt;
+        }
+        h2 {
+            color: #1f2937;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .box {
+            background-color: #f9fafb;
+            border-left: 4px solid #6366f1;
+            padding: 15px;
+            margin: 15px 0;
+            page-break-inside: avoid;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            page-break-inside: avoid;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th {
+            background-color: #f3f4f6;
+            color: #374151;
+            font-weight: bold;
+        }
+        .metric-cards {
+            display: flex; /* WeasyPrint supports flex basic */
+        }
+        .card {
+            background-color: #1e1b4b;
+            color: white;
+            padding: 15px;
+            margin: 10px 10px 10px 0;
+            border-radius: 8px;
+            width: 30%;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+        .card-title { font-size: 10pt; opacity: 0.8; margin-bottom: 5px; }
+        .card-value { font-size: 18pt; font-weight: bold; margin: 0; }
+        .badge-fixa { color: #ef4444; font-weight: bold; }
+        .badge-variavel { color: #f59e0b; font-weight: bold; }
+        .badge-investimento { color: #6366f1; font-weight: bold; }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 9pt;
+            color: #9ca3af;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>S7te Plan Builder</h1>
+        <p>Strategic Executive Summary</p>
+    </div>
+
+    <div>
+        <h2>Resumo Executivo (IA)</h2>
+        <div class="box">
+            <p>{{ abstract | default("Este documento contém o plano estruturado pela IA.") }}</p>
+        </div>
+    </div>
+
+    <h2>Análise Financeira (DRE Projetado)</h2>
+    
+    <div class="metric-cards">
+        <div class="card">
+            <div class="card-title">Investimento Inicial</div>
+            <div class="card-value">R$ {{ (financials.initial_investment_total | default(0)) }}</div>
+        </div>
+        <div class="card" style="background-color: #064e3b;">
+            <div class="card-title">ROI Estimado Anual</div>
+            <div class="card-value">{{ financials.roi_percentage | default(0) }}%</div>
+        </div>
+        <div class="card" style="background-color: #4c1d95;">
+            <div class="card-title">Break-even (Ponto de Equilíbrio)</div>
+            <div class="card-value">{{ financials.break_even_point_months | default(0) }} meses</div>
+        </div>
+    </div>
+
+    <p style="margin-top: 20px;">
+        <strong>Custo Fixo Mensal:</strong> R$ {{ financials.monthly_fixed_costs | default(0) }} <br>
+        <strong>Receita Bruta Estimada (Mês):</strong> R$ {{ financials.expected_monthly_revenue | default(0) }}
+    </p>
+
+    <h2>Detalhamento de Custos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Item / Descrição</th>
+                <th>Tipo</th>
+                <th>Valor (R$)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in financials.costs_breakdown %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>
+                    {% if item.type == 'fixa' %}
+                        <span class="badge-fixa">Custo Fixo</span>
+                    {% elif item.type == 'variavel' %}
+                        <span class="badge-variavel">Custo Variável</span>
+                    {% else %}
+                        <span class="badge-investimento">Invest. Inicial</span>
+                    {% endif %}
+                </td>
+                <td>{{ item.amount }}</td>
+            </tr>
+            {% endfor %}
+            {% if not financials.costs_breakdown %}
+            <tr>
+                <td colspan="3" style="text-align:center;">Custos não detalhados.</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        Gerado automaticamente por <strong>S7te Digital AI First</strong><br>
+        Confidenciais | Uso Estratégico Exclusivo
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<h1 class="chapter-title" id="marketing">3. Ferramentas de Marketing e Growth</h1>
+
+<h2>Estratégia do Funil de Vendas (AIDA/GARR)</h2>
+<table class="financial-table">
+    <thead>
+        <tr>
+            <th>Etapa</th>
+            <th>Descrição</th>
+            <th>Ações Chave</th>
+            <th>Conversão (Est.)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Topo (Atratividade)</strong></td>
+            <td>{{ plan.ferramentas.funil_vendas.topo.descricao }}</td>
+            <td>{{ plan.ferramentas.funil_vendas.topo.acoes | join(', ') }}</td>
+            <td>{{ plan.ferramentas.funil_vendas.topo.taxa_conversao_estimada }}%</td>
+        </tr>
+        <tr>
+            <td><strong>Meio (Engajamento)</strong></td>
+            <td>{{ plan.ferramentas.funil_vendas.meio.descricao }}</td>
+            <td>{{ plan.ferramentas.funil_vendas.meio.acoes | join(', ') }}</td>
+            <td>{{ plan.ferramentas.funil_vendas.meio.taxa_conversao_estimada }}%</td>
+        </tr>
+        <tr>
+            <td><strong>Fundo (Conversão)</strong></td>
+            <td>{{ plan.ferramentas.funil_vendas.fundo.descricao }}</td>
+            <td>{{ plan.ferramentas.funil_vendas.fundo.acoes | join(', ') }}</td>
+            <td>{{ plan.ferramentas.funil_vendas.fundo.taxa_conversao_estimada }}%</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="highlight-box">
+    <strong>Métricas de Unidade de Negócio:</strong><br/>
+    CAC Projetado (Adquirir Cliente): R$ {{ plan.ferramentas.funil_vendas.cac_projetado }}<br/>
+    LTV Projetado (Valor de Vida): R$ {{ plan.ferramentas.funil_vendas.ltv_projetado }}<br/>
+    Ratio LTV/CAC: {{ plan.ferramentas.funil_vendas.razao_ltv_cac }}
+</div>
+
+<h2>Canais de Aquisição Prioritários</h2>
+<ul>
+{% for channel in plan.ferramentas.canais_aquisicao %}
+    <li>
+        <strong>{{ channel.nome }}:</strong> {{ channel.estrategia }}<br>
+        <small>Atratividade: {{ channel.nota_atratividade }}/10 | Alcance: {{ channel.nota_alcance }}/10</small>
+    </li>
+{% endfor %}
+</ul>
+
+<h2 style="page-break-before: always;">Quadro de Experimentação</h2>
+<table class="financial-table" style="font-size: 9pt;">
+    <thead>
+        <tr>
+            <th>Hipótese</th>
+            <th>Método de Validação</th>
+            <th>Métrica de Sucesso</th>
+            <th>Prazo</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for hip in plan.ferramentas.quadro_experimentacao.hipoteses %}
+        <tr>
+            <td>{{ hip.hipotese }}</td>
+            <td>{{ hip.metodo_validacao }}</td>
+            <td>{{ hip.metrica_sucesso }}</td>
+            <td>{{ hip.prazo_dias }} dias</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
