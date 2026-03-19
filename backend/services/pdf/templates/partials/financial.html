@@ -112,7 +112,32 @@
     {% endfor %}
 </div>
 
-<div class="highlight-box">
-    <strong>Análise do Especialista Financeiro:</strong><br>
-    <p style="font-size: 10pt; line-height: 1.5;">{{ plan.financas.comentarios_financeiros }}</p>
-</div>
+    <h3>Detalhamento de Investimentos Fixos</h3>
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th>Item de Investimento</th>
+                <th>Valor Estimado</th>
+                <th>Justificativa Estratégica</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inv in plan.financas.fixed_investments %}
+            <tr>
+                <td>{{ inv.item }}</td>
+                <td>R$ {{ "%.2f"|format(inv.value) }}</td>
+                <td>{{ inv.get('justificativa_item', 'Essencial para a infraestrutura básica de lançamento.') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="highlight-box">
+        <h3>Sustentabilidade e Reinvestimento</h3>
+        <p style="white-space: pre-wrap;">{{ plan.financas.get('sustentabilidade_financeira', 'Análise de longo prazo sobre o fluxo de caixa e reserva de capital.') }}</p>
+    </div>
+
+    <div class="highlight-box">
+        <h3>Análise Narrativa do Consultor Financeiro</h3>
+        <p style="white-space: pre-wrap;">{{ plan.financas.comentarios_financeiros }}</p>
+    </div>

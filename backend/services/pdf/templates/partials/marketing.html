@@ -88,6 +88,42 @@
     </div>
 </div>
 
+    <div class="highlight-box">
+        <h3>Análise Narrativa de Growth</h3>
+        <p>{{ marketing.sales_funnel.get('justificativa_metrica_growth', 'Análise detalhada das métricas de aquisição e retenção.') }}</p>
+    </div>
+
+    <div class="funnel-card">
+        <div class="funnel-header">Canais de Aquisição Detalhados</div>
+        <p style="white-space: pre-wrap;">{{ marketing.get('canais_aquisicao_detalhados', 'Detalhamento exaustivo dos canais prioritários.') }}</p>
+    </div>
+
+    <h3>Quadro de Experimentação (Growth Hacking)</h3>
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th>Hipótese</th>
+                <th>Método de Validação</th>
+                <th>Métrica de Sucesso</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for exp in marketing.experiment_board %}
+            <tr>
+                <td>{{ exp.hypothesis_description }}</td>
+                <td>{{ exp.validation_method }}</td>
+                <td>{{ exp.success_metric }} (Prazo: {{ exp.deadline }} dias)</td>
+                <td>
+                    <span class="badge {% if exp.status == 'Validado' %}badge-low{% else %}badge-high{% endif %}">
+                        {{ exp.status }}
+                    </span>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 <h2 style="page-break-before: always;">Quadro de Experimentação (Validando o Modelo)</h2>
 <p>Seguindo a metodologia Lean, listamos as principais hipóteses que serão validadas para reduzir os riscos do negócio.</p>
 

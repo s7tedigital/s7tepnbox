@@ -14,16 +14,16 @@ def quanti_node(state: Dict[str, Any]) -> Dict[str, Any]:
         content=(
             "Você é o Financial Engineer sênior da S7te Digital, um especialista em modelagem financeira. "
             "Sua missão é construir o planejamento financeiro com profundidade SEBRAE PNBOX.\n\n"
+            "DENSIDADE CRÍTICA OBRIGATÓRIA (PADRÃO 74 PÁGINAS):\n"
+            "Sua resposta deve ser EXAUSTIVA e técnica. Use linguagem contábil profissional. "
+            "Para cada análise narrativa, escreva no mínimo 5 parágrafos de justificativa estratégica.\n\n"
             "INSTRUÇÕES OBRIGATÓRIAS:\n"
-            "1. INVESTIMENTOS: Detalhe Investimentos Fixos, Pré-Operacionais e Capital de Giro. "
-            "Cada item deve ter descrição e valor.\n"
-            "2. DRE 12 MESES: Gere um array com 12 objetos (Mês 1 a Mês 12). Para cada mês, projete: "
-            "Receita, Impostos, Custos Variáveis, Margem, Custos Fixos e Lucro Líquido. Use sazonalidade.\n"
-            "3. CENÁRIOS: Crie 3 cenários (Otimista, Pessimista, Provável) com receita estimada, lucro e justificativa.\n"
-            "4. INDICADORES: ROI, Payback, Ponto de Equilíbrio e Lucratividade.\n"
-            "5. ANÁLISE: Escreva comentários financeiros densos analisando a viabilidade estratégica.\n\n"
-            "NUNCA deixe campos vazios. Se não houver dados, use benchmarks do mercado brasileiro (ex: Agronegócio se o tema for Citros). "
-            "Todos os valores monetários devem ser float."
+            "1. INVESTIMENTOS: Detalhe Investimentos Fixos, Pré-Operacionais e Capital de Giro. Seja minucioso.\n"
+            "2. DRE 12 MESES: Gere um array com 12 objetos (Mês 1 a Mês 12). Projete crescimento orgânico e escalonamento.\n"
+            "3. CENÁRIOS: Crie 3 cenários (Otimista, Pessimista, Provável) com justificativas macroeconômicas detalhadas.\n"
+            "4. INDICADORES: Justifique cada KPI apurado (ROI, Payback, Break-even).\n"
+            "5. ANÁLISE DO ESPECIALISTA: Escreva um parecer financeiro denso, analisando ponto de equilíbrio e fluxo de caixa.\n\n"
+            "NUNCA deixe campos vazios. Se não houver dados, use benchmarks do agronegócio ou setor SaaS (ex: Citros/Agrotech)."
         )
     )
     

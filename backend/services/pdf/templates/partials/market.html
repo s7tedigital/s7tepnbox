@@ -80,38 +80,55 @@
     </tr>
 </table>
 
-<h2>Estratégia Defensiva & Matriz de Concorrência</h2>
-<table class="financial-table" style="font-size: 9pt;">
+<div class="highlight-box">
+    <h3>Análise Setorial Exaustiva</h3>
+    <p>{{ market.get('analise_setorial_detalhada', 'Análise profunda em processamento...') }}</p>
+</div>
+
+<div class="highlight-box">
+    <h3>Persona: {{ market.persona.nome_ficticio }}</h3>
+    <p><strong>Frase Marcante:</strong> "{{ market.persona.frase_marcante }}"</p>
+    <p style="white-space: pre-wrap;">{{ market.persona.persona_bio }}</p>
+</div>
+
+<h3>Matriz de Concorrência</h3>
+<table class="financial-table">
     <thead>
         <tr>
             <th>Concorrente</th>
-            <th>Convênia.</th>
-            <th>Inovação</th>
+            <th>Conv.</th>
+            <th>Inov.</th>
             <th>Preço</th>
-            <th>Qualidade</th>
-            <th>Suporte</th>
-            <th>Tecnol.</th>
+            <th>Qual.</th>
+            <th>Sup.</th>
+            <th>Tec.</th>
             <th>Média</th>
         </tr>
     </thead>
     <tbody>
-        {% for comp in plan.problema_solucao.analise_concorrencia.competitor_matrix %}
-        <tr {% if loop.first %}style="background: #eef2ff; font-weight: bold;"{% endif %}>
-            <td>{{ comp.name }}</td>
-            <td>{{ comp.convenience }}</td>
-            <td>{{ comp.innovation }}</td>
-            <td>{{ comp.price }}</td>
-            <td>{{ comp.quality }}</td>
-            <td>{{ comp.support }}</td>
-            <td>{{ comp.technology }}</td>
-            <td>{{ comp.average_score }}</td>
+        {% for item in problem.analise_concorrencia.competitor_matrix %}
+        <tr>
+            <td><strong>{{ item.name }}</strong></td>
+            <td>{{ item.convenience }}</td>
+            <td>{{ item.innovation }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.quality }}</td>
+            <td>{{ item.support }}</td>
+            <td>{{ item.technology }}</td>
+            <td><strong>{{ item.average_score }}</strong></td>
+        </tr>
+        <tr>
+            <td colspan="8">
+                <small><strong>Justificativa Técnica:</strong> {{ item.get('justificativa_notas', 'Análise técnica de diferenciação competitiva.') }}</small>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-<div class="highlight-box" style="border-left-color: #ef4444; margin-top: 10px;">
-    <strong>Plano de Defesa Estratégica:</strong><br>
-    <p>{{ plan.problema_solucao.analise_concorrencia.estrategia_defensiva }}</p>
+
+<div class="highlight-box">
+    <h3>Estratégia Defensiva</h3>
+    <p>{{ problem.analise_concorrencia.estrategia_defensiva }}</p>
 </div>
 
 <h2 style="page-break-before: always;">Mapeamento da Jornada do Cliente</h2>

@@ -36,6 +36,17 @@
     {% endfor %}
 </div>
 
+    <div class="highlight-box">
+        <h3>Fluxograma Operacional Narrativo</h3>
+        <p style="white-space: pre-wrap;">{{ operativo.get('fluxograma_operacional', 'Passo a passo detalhado do motor operacional da empresa.') }}</p>
+    </div>
+
+    <div class="highlight-box">
+        <h3>Análise de Riscos e Mitigação PNBOX</h3>
+        <p style="white-space: pre-wrap;">{{ estrategia.get('analise_de_riscos_detalhada', 'Mapeamento exaustivo de riscos e planos de contingência.') }}</p>
+    </div>
+
+    <h2 style="page-break-before: always;">Matriz SWOT Expandida</h2>
 <h2 style="page-break-before: always;">Detalhamento Operacional (PNBOX)</h2>
 <table class="financial-table">
     <thead>
