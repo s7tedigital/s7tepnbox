@@ -35,13 +35,15 @@ def analyst_node(state: Dict[str, Any]) -> Dict[str, Any]:
             "1. SEGMENTAÇÃO: Avalie 2 segmentos dando notas de 0 a 10 nos 5 critérios (tamanho, lucro, tendência, concorrência, aderência). "
             "Some as notas e justifique a escolha do principal.\n"
             "2. PERSONA: Crie uma persona ultra-detalhada com nome fictício, idade, renda, profissão, dores, desejos, "
-            "fluência digital, canais e rotina manhã/tarde/noite. Inclua uma frase marcante.\n"
+            "fluência digital, canais e rotina manhã/tarde/noite. OBRIGATÓRIO: Forneça uma 'biografia' densa "
+            "(mínimo 2 parágrafos) que explique o contexto de vida desta pessoa. Inclua uma frase marcante.\n"
             "3. JORNADA DO CLIENTE: Mapeie em 3 fases (Antes/Durante/Depois) com pontos de contato, emoções e oportunidades.\n"
             "4. TAM/SAM/SOM: Use dados reais do mercado brasileiro. Seja audaz mas realista.\n"
             "5. PROPOSTA DE VALOR: Crie declaração impactante com benefícios funcionais, emocionais e sociais.\n"
             "6. CONCORRÊNCIA: Compare com 2 concorrentes reais dando notas 0-10 em preço, qualidade, "
-            "atendimento, tecnologia e marca. Inclua o nosso negócio na comparação.\n\n"
-            "NÃO DEIXE NENHUM CAMPO VAZIO. Faça projeções audazes e coerentes para o mercado brasileiro.\n"
+            "atendimento, tecnologia e marca. Inclua o nosso negócio na comparação. OBRIGATÓRIO: Defina uma "
+            "'estrategia_defensiva' clara para nos protegermos ou nos diferenciarmos destes concorrentes.\n\n"
+            "NÃO DEIXE NENHUM CAMPO VAZIO. Faça projeções audazes e descrições densas (mínimo 200 palavras no total para descrições). "
             "PREENCHA EXATAMENTE A ESTRUTURA JSON EXIGIDA."
         )
     )

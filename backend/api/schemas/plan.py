@@ -35,6 +35,7 @@ class Persona(BaseModel):
     rotina_manha: str = Field(description="Descrição da rotina matinal típica")
     rotina_tarde: str = Field(description="Descrição da rotina vespertina típica")
     rotina_noite: str = Field(description="Descrição da rotina noturna típica")
+    biografia: str = Field(description="Breve biografia narrativa da persona (quem é, o que faz, por que tem esse problema)")
     frase_marcante: str = Field(description="Uma frase que a persona diria sobre o problema")
 
 class EtapaJornada(BaseModel):
@@ -83,6 +84,7 @@ class AnaliseConcorrencia(BaseModel):
     nosso_negocio: NotaConcorrente = Field(description="Notas do nosso negócio")
     concorrente_1: NotaConcorrente = Field(description="Notas do concorrente direto 1")
     concorrente_2: NotaConcorrente = Field(description="Notas do concorrente direto 2")
+    estrategia_defensiva: str = Field(description="Nossa estratégia para nos protegermos ou nos diferenciarmos desses concorrentes")
     conclusao: str = Field(description="Conclusão comparativa: onde ganhamos e onde perdemos")
 
 class ProblemaSolucao(BaseModel):
@@ -105,9 +107,10 @@ class MatrizSWOTExpandida(BaseModel):
     ameacas: List[ItemSWOT] = Field(description="Ameaças externas com impacto e ação")
 
 class Estrategia(BaseModel):
-    visao: str = Field(description="Visão de longo prazo do negócio (3-5 anos)")
     missao: str = Field(description="Missão do negócio")
+    visao: str = Field(description="Visão de longo prazo do negócio (3-5 anos)")
     valores: List[str] = Field(description="Valores fundamentais da empresa")
+    pilares_culturais: str = Field(description="Explicação de como a cultura da empresa suporta a execução da estratégia")
     swot: MatrizSWOTExpandida = Field(description="Matriz SWOT detalhada com ações estratégicas")
     objetivos_smart: List[str] = Field(description="Até 5 objetivos SMART para os primeiros 12 meses")
 
@@ -172,6 +175,7 @@ class Financas(BaseModel):
     custos_variaveis: CustosVariaveis = Field(description="Detalhamento de custos variáveis")
     dre_anual: DRE_Anual = Field(description="DRE projetada para 12 meses")
     indicadores: Indicadores = Field(description="Indicadores de viabilidade")
+    comentarios_financeiros: str = Field(description="Comentários narrativos sobre a saúde financeira e lógica das projeções")
 
 # ============================================================
 # MÓDULO 5: FERRAMENTAS COMPLEMENTARES (MARKETING & GROWTH)

@@ -1,4 +1,14 @@
-<h1 class="chapter-title" id="operational">4. Plano Operacional</h1>
+<h1 class="chapter-title" id="operational">4. Estratégia e Plano Operacional</h1>
+
+<div class="highlight-box">
+    <h3>Cultura e Identidade</h3>
+    <p><strong>Missão:</strong> {{ plan.estrategia.missao }}</p>
+    <p><strong>Visão:</strong> {{ plan.estrategia.visao }}</p>
+    <p><strong>Valores:</strong> {{ plan.estrategia.valores | join(', ') }}</p>
+    <hr>
+    <p><strong>Pilares Culturais:</strong><br>
+    {{ plan.estrategia.pilares_culturais | default('A cultura organizacional está sendo definida...') | replace('\n', '<br>') }}</p>
+</div>
 
 <h2>Atividades-Chave Operacionais</h2>
 <table class="financial-table">
