@@ -20,7 +20,7 @@ export default function BuilderPage() {
 
   // Auto-scroll
   useEffect(() => {
-    console.log("[S7te] BuilderPage v1.5 rendered. Messages:", messages.length);
+    console.log("[S7te] BuilderPage v1.6 rendered. Messages:", messages.length);
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
@@ -63,7 +63,7 @@ export default function BuilderPage() {
             <BrainCircuit className="h-5 w-5 text-white" />
           </div>
           <div>
-            <h1 className="font-semibold text-zinc-100 tracking-tight">S7te Plan Builder v1.5</h1>
+            <h1 className="font-semibold text-zinc-100 tracking-tight">S7te Plan Builder v1.6</h1>
             <p className="text-xs text-indigo-400/80 font-medium">Orchestrator AI Active</p>
           </div>
         </div>
